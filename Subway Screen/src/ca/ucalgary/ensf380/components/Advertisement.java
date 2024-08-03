@@ -1,5 +1,6 @@
 package ca.ucalgary.ensf380.components;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -20,16 +21,15 @@ public class Advertisement {
         }
     }
 
-    public void insertNewAd(String brand_name, String gifname)throws Exception {
-    	if (!gifname.startsWith("/Gifs/")) {
-            throw new Exception("First you have to put the GIF into the Gif Folder");
-        }
+    public void insertNewAd(String brand_name,  String fileName)throws Exception {
+    	
+    	final String filePath = "Gifs/" + fileName;
     	try {
-            final String path = "/Gifs/" + gifname;  // Added a slash for correct path formatting
+
             String query = "INSERT INTO Gifs (brand_name, path) VALUES(?, ?)";
             PreparedStatement myStmt = dbConnect.prepareStatement(query);
             myStmt.setString(1, brand_name);
-            myStmt.setString(2, path);
+            myStmt.setString(2, filePath);
             myStmt.executeUpdate();  // Execute the update to insert data
             myStmt.close();
         } catch (SQLException ex) {

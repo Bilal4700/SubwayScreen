@@ -6,7 +6,7 @@ public class TestAdvertisement {
 
     public static void main(String[] args) throws Exception {
         Advertisement adManager = new Advertisement();
-        adManager.createConnection(); // Establish the database connection
+        adManager.createConnection(); 
         adManager.fetchAd();
         String paths = adManager.getAdPaths();
         System.out.println("Fetched Ad Paths:\n" + paths);
