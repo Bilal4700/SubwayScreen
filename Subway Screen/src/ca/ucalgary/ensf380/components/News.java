@@ -9,20 +9,21 @@ import java.util.regex.Pattern;
 public class News {
 	
 	private String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
-	
 	public  String countryCode ;
     private static final String API_KEY = "19705915eef84ed2af4ec71feda81a87";
-
+	private String news;
+	
     public News(String countryCode) {
+
         if (countryCode == null|| countryCode.trim().isEmpty()) {
-            this.countryCode = "ca";
+            this.countryCode = "ca"; 
         } else {
             this.countryCode = countryCode;
         }
     }
+    
+    public void fetchAndParse() throws Exception {
 
-    public String fetchAndParse() throws Exception {
-    	String news = "";
         final String API_URL = "https://newsapi.org/v2/top-headlines?country=" + countryCode + "&apiKey=" + API_KEY;
         URL urlObj = new URL(API_URL);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
@@ -45,13 +46,16 @@ public class News {
 
                 String author = matcher.group(1); 
                 String title = matcher.group(2); 
-                news += "According to " + author + ": " + title + "\n";
+                this.news += "According to " + author + ": " + title + "\n";
 
 
             }
         
         }
-        return news;
+
+    }
+    public String getNews() {
+    	return news;
     }
       
 

@@ -14,10 +14,11 @@ public class TestNews {
 
         News news = new News(countryCode);
         try {
-           String myNews =  news.fetchAndParse();
-           System.out.println(myNews);
+        	news.fetchAndParse();
+        	String myNews = news.getNews();
+        	System.out.println(myNews);
         } catch (Exception e) {
-            System.err.println("Failed to fetch and parse news");
+        	e.printStackTrace();
         }
     }
 

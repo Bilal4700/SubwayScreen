@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Advertisement {
     private Connection dbConnect;
     private ResultSet results;
+    private String adPaths;
 
     public Advertisement() {
     }
@@ -36,7 +37,7 @@ public class Advertisement {
         }
     }
 
-    public String fetchAd() {
+    public void fetchAd() {
         ArrayList<String> filepaths = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -52,14 +53,20 @@ public class Advertisement {
             for (String path : filepaths) {
                 stringBuilder.append(path).append('\n');
             }
-
+            this.adPaths = stringBuilder.toString(); 
             myStmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
 
-        return stringBuilder.toString();
+
     }
+    public String getAdPaths() {
+    	return adPaths;
+    }
+    
+    
     
 
 
