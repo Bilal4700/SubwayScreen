@@ -14,7 +14,7 @@ public class TestNews {
 
         News news = new News(countryCode);
         try {
-        	news.fetchAndParse();
+        	news.fetch();
         	String myNews = news.getNews();
         	System.out.println(myNews);
         } catch (Exception e) {

@@ -2,10 +2,13 @@ package ca.ucalgary.ensf380.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import ca.ucalgary.ensf380.components.WeatherAndTime;
 
 public class WeatherAndTimePanel extends JPanel {
@@ -14,6 +17,7 @@ public class WeatherAndTimePanel extends JPanel {
     private JLabel windLabel;
     private JLabel humidityLabel;
     private JLabel timeLabel;
+    private String updatedTime;
 
     public WeatherAndTimePanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -29,33 +33,29 @@ public class WeatherAndTimePanel extends JPanel {
 
         Font font = new Font("Arial", Font.PLAIN, 18);
         locationLabel.setFont(font);
-        locationLabel.setForeground(Color.DARK_GRAY); // Setting color for location label
+        locationLabel.setForeground(Color.DARK_GRAY);
         windLabel.setFont(font);
-        windLabel.setForeground(Color.RED); // Setting color for wind label
+        windLabel.setForeground(Color.RED);
         humidityLabel.setFont(font);
-        humidityLabel.setForeground(Color.RED); // Setting color for humidity label
+        humidityLabel.setForeground(Color.RED);
         timeLabel.setFont(font);
-        timeLabel.setForeground(Color.DARK_GRAY); // Setting color for time label
+        timeLabel.setForeground(Color.DARK_GRAY);
     }
 
-    public void updateWeatherAndTime(WeatherAndTime weatherFetcher) {
-        locationLabel.setText(weatherFetcher.getLocation() + " " + weatherFetcher.getConditionIcon() + " " + weatherFetcher.getTemperature());
-        windLabel.setText("Wind: " + weatherFetcher.getWind());
-        humidityLabel.setText("Humidity: " + weatherFetcher.getHumidity());
+    public void updateWeatherAndTime(WeatherAndTime location) throws Exception {
+        locationLabel.setText(location.getLocation() + " " + location.getConditionIcon() + " " + location.getTemperature());
+        windLabel.setText("Wind: " + location.getWind());
+        humidityLabel.setText("Humidity: " + location.getHumidity());
+        liveUpdate(location);
+        timeLabel.setText("Local Time: " + updatedTime);
     }
 
-    public void LiveClock() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-                String currentTime = timeFormat.format(new Date());
-                timeLabel.setText("Current Time: " + currentTime);
-            }
-        };
-        timer.scheduleAtFixedRate(task, 0, 1000);
+    public void liveUpdate(WeatherAndTime location) throws Exception {
+	
     }
-
 }
+    
+
+
+
 

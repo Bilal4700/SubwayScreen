@@ -10,12 +10,14 @@ public class TestWeatherAndTimePanel {
     public static void createAndShowGUI() {
         JFrame frame = new JFrame("Weather and Time");
         WeatherAndTimePanel weatherAndTimePanel = new WeatherAndTimePanel();
-        WeatherAndTime weatherFetcher = new WeatherAndTime("Beijing");
+        WeatherAndTime weatherFetcher = new WeatherAndTime("Toronto");
 
         try {
-            weatherFetcher.fetchWeather();
+            weatherFetcher.fetch();
             weatherAndTimePanel.updateWeatherAndTime(weatherFetcher);
-            weatherAndTimePanel.LiveClock();
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

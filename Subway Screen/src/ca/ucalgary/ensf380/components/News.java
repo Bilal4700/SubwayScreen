@@ -6,7 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class News {
+public class News extends Fetcher {
 	
 	private String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
 	public  String countryCode ;
@@ -22,7 +22,9 @@ public class News {
         }
     }
     
-    public void fetchAndParse() throws Exception {
+    
+    @Override
+    public void fetch() throws Exception {
 
         final String API_URL = "https://newsapi.org/v2/top-headlines?country=" + countryCode + "&apiKey=" + API_KEY;
         URL urlObj = new URL(API_URL);

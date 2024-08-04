@@ -19,7 +19,7 @@ public class AdvertisementPanel extends JFrame {
     public AdvertisementPanel() throws SQLException {
         Advertisement adManager = new Advertisement();
         adManager.createConnection();  // Ensure connection is established
-        adManager.fetchAd();           // Fetch ads from the database
+        adManager.fetch();           // Fetch ads from the database
         setTitle("Advertisement Panel");
         setSize(300, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

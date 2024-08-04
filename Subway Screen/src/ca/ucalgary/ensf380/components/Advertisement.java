@@ -1,10 +1,9 @@
 package ca.ucalgary.ensf380.components;
 
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Advertisement {
+public class Advertisement extends Fetcher{
     private Connection dbConnect;
     private ResultSet results;
     private String adPaths;
@@ -37,7 +36,8 @@ public class Advertisement {
         }
     }
 
-    public void fetchAd() {
+    @Override
+    public void fetch() {
         ArrayList<String> filepaths = new ArrayList<>();
         StringBuilder stringBuilder = new StringBuilder();
         
