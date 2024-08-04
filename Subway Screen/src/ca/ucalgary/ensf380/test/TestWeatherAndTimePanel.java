@@ -14,9 +14,8 @@ public class TestWeatherAndTimePanel {
 
         try {
             weatherFetcher.fetch();
+
             weatherAndTimePanel.updateWeatherAndTime(weatherFetcher);
-
-
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -46,12 +46,14 @@ public class WeatherAndTimePanel extends JPanel {
         locationLabel.setText(location.getLocation() + " " + location.getConditionIcon() + " " + location.getTemperature());
         windLabel.setText("Wind: " + location.getWind());
         humidityLabel.setText("Humidity: " + location.getHumidity());
-        liveUpdate(location);
-        timeLabel.setText("Local Time: " + updatedTime);
+        timeLabel.setText("Local Time: " + location.getTime());
     }
 
     public void liveUpdate(WeatherAndTime location) throws Exception {
-	
+
+ 
+
+    	
     }
 }
     

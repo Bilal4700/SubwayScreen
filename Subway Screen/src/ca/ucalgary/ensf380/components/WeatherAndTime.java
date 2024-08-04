@@ -50,6 +50,7 @@ public class WeatherAndTime extends Fetcher {
         } else {
             throw new Exception("Error Reading the response with response code: " + responseCode);
         }
+        
     }
     
 
