@@ -13,13 +13,13 @@ public class News extends Fetcher {
     private static final String API_KEY = "19705915eef84ed2af4ec71feda81a87";
 	private String news;
 	
+	public News() {
+		this.countryCode = "ca";
+	}
+	
     public News(String countryCode) {
-
-        if (countryCode == null|| countryCode.trim().isEmpty()) {
-            this.countryCode = "ca"; 
-        } else {
-            this.countryCode = countryCode;
-        }
+        this.countryCode = countryCode;
+        
     }
     
     

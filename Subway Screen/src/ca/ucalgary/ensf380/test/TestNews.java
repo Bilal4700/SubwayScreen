@@ -9,7 +9,7 @@ public class TestNews {
 		if (args.length > 0) {
 		    countryCode = args[0];
 		} else {
-		    countryCode = "";
+		    countryCode = "ca";
 		}
 
         News news = new News(countryCode);

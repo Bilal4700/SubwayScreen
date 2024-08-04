@@ -1,33 +1,29 @@
 package ca.ucalgary.ensf380.gui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import ca.ucalgary.ensf380.components.Advertisement;
 
-public class AdvertisementPanel extends JFrame {
-    private ArrayList<String> gifPaths;
+public class AdvertisementPanel {
+    private JPanel panel;
     private JLabel label;
+    private ArrayList<String> gifPaths;
     private int currentIndex = 0;
 
     public AdvertisementPanel() throws SQLException {
-        Advertisement adManager = new Advertisement();
-        adManager.createConnection();  // Ensure connection is established
-        adManager.fetch();           // Fetch ads from the database
-        setTitle("Advertisement Panel");
-        setSize(300, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
+        panel = new JPanel();
         label = new JLabel();
         label.setHorizontalAlignment(JLabel.CENTER);
-        getContentPane().add(label, BorderLayout.CENTER);
+        panel.add(label);
+
+        Advertisement adManager = new Advertisement();
+        adManager.createConnection();  // Ensure connection is established
+        adManager.fetch();             // Fetch ads from the database
 
         // Parse ad paths into a list
         String adPaths = adManager.getAdPaths();
@@ -37,14 +33,12 @@ public class AdvertisementPanel extends JFrame {
             gifPaths = new ArrayList<>();
         }
 
-        updateLabel();
-
         // Set up a timer to cycle through gifs
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                updateLabel();
+                SwingUtilities.invokeLater(() -> updateLabel());
             }
         }, 0, 10000); // Change image every 10 seconds
     }
@@ -57,8 +51,8 @@ public class AdvertisementPanel extends JFrame {
         }
         // Ensure the path is valid and file exists before trying to create an ImageIcon
         String currentPath = gifPaths.get(currentIndex);
-        File imgFile = new File(currentPath);
-        if (imgFile.exists()) {
+        File file = new File(currentPath);
+        if (file.exists()) {
             ImageIcon icon = new ImageIcon(currentPath);
             label.setIcon(icon);
             label.setText(""); // Clear any text
@@ -69,6 +63,9 @@ public class AdvertisementPanel extends JFrame {
         currentIndex = (currentIndex + 1) % gifPaths.size(); // Cycle through the list
     }
 
-
+    public JPanel getPanel() {
+        return panel;
+    }
 }
+
 

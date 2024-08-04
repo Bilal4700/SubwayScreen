@@ -54,7 +54,6 @@ public class WeatherAndTime extends Fetcher {
     }
     
 
-
     public String getLocation() {
         return location;
     }
