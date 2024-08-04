@@ -48,7 +48,7 @@ public class News extends Fetcher {
 
                 String author = matcher.group(1); 
                 String title = matcher.group(2); 
-                this.news += "According to " + author + ": " + title + "\n";
+                this.news +=  author + ": " + title + "\n";
 
 
             }

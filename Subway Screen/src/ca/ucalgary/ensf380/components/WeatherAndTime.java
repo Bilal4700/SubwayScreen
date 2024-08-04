@@ -13,6 +13,7 @@ public class WeatherAndTime extends Fetcher {
     private String wind;
     private String humidity;
     private String time;
+    
 
     public WeatherAndTime(String location) {
         this.location = location;

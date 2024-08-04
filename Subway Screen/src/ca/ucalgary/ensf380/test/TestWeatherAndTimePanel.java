@@ -14,7 +14,7 @@ public class TestWeatherAndTimePanel {
             try {
             	
             	//This is how to retreive Panel
-                weatherAndTimePanel = new WeatherAndTimePanel();
+                weatherAndTimePanel = new WeatherAndTimePanel("Toronto");
                 frame.add(weatherAndTimePanel.getPanel());
             } catch (Exception e) {
                 System.out.println("Error initializing WeatherAndTimePanel: " + e.getMessage());

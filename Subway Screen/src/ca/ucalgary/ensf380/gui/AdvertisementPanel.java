@@ -1,6 +1,9 @@
 package ca.ucalgary.ensf380.gui;
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,10 +19,12 @@ public class AdvertisementPanel {
     private int currentIndex = 0;
 
     public AdvertisementPanel() throws SQLException {
-        panel = new JPanel();
+        panel = new JPanel(new BorderLayout());
         label = new JLabel();
         label.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(label);
+        label.setVerticalAlignment(JLabel.CENTER);
+        
+        panel.add(label, BorderLayout.CENTER);
 
         Advertisement adManager = new Advertisement();
         adManager.createConnection();  // Ensure connection is established
