@@ -51,6 +51,7 @@ public class StationMapPanel extends JPanel {
             g.fillOval(X, Y, 6, 6); // Draw the dot
         }
 
+        
         // Draw trains
         for (Train train : trains) {
             for (Station station : stations) {
