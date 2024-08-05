@@ -3,8 +3,7 @@ package ca.ucalgary.ensf380.maps;
 
 import javax.swing.*;
 
-import ca.ucalgary.edu.ensf380.Station;
-import ca.ucalgary.edu.ensf380.Train;
+
 
 import java.awt.*;
 import java.util.List;
