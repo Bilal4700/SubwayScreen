@@ -63,7 +63,7 @@ public class StationMapPanel extends JPanel {
                 	double heightScale = 450.0 / 700.0;
                 	int X = (int) (x * widthScale);
                 	int Y = (int) (y * heightScale);
-                	if (trainNumb == train.getTrainNum()) {
+                	if (trainNumb.equals(train.getTrainNum())) {
                     	g.setColor(Color.ORANGE);
                         g.fillRect(X - 10, Y - 5, 20, 10);
                 	}else {

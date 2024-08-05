@@ -74,7 +74,7 @@ public class LatestOutputReader implements Runnable {
 
                 String[] eachWord = line.split(",");
                 if (eachWord.length >= 4) {
-                    String trainNum = eachWord[0] + eachWord[1];
+                    String trainNum = eachWord[1];
                     String atStation = eachWord[2];
                     String trainDirection = eachWord[3];
 

@@ -3,11 +3,11 @@ R,1,R13,forward,R43
 R,2,R18,forward,R43
 R,3,R36,backward,R01
 R,4,R40,backward,R01
-B,5,B13,forward,B44
-B,6,B18,forward,B44
+B,5,B11,forward,B44
+B,6,B16,forward,B44
 B,7,B37,backward,B01
 B,8,B41,backward,B01
-G,9,G09,forward,G33
-G,10,G14,forward,G33
+G,9,G11,forward,G33
+G,10,G16,forward,G33
 G,11,G26,backward,G01
 G,12,G30,backward,G01

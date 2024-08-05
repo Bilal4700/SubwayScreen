@@ -15,11 +15,11 @@ public class TestSubwayScreen {
         }
 
         String city = args[0];
-        String countrycode = (args.length == 2) ? args[1] : null;
-
+        String countrycode = (args.length == 3) ? args[2] : null;
+        String trainNumb = args[1];
         SwingUtilities.invokeLater(() -> {
 			try {
-				new SubwayScreen(city, countrycode);
+				new SubwayScreen(city, countrycode, trainNumb);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -52,6 +52,7 @@ public class Main {
             String city = args[0];
             String countrycode = (args.length == 3) ? args[2] : null;
             String trainNumb = args[1];
+            System.out.println(trainNumb);
             SwingUtilities.invokeLater(() -> {
                 try {
                     new SubwayScreen(city, trainNumb, countrycode);
