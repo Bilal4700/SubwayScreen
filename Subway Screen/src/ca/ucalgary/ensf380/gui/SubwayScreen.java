@@ -4,6 +4,7 @@ import javax.swing.*;
 import ca.ucalgary.ensf380.components.News;
 import ca.ucalgary.ensf380.maps.LatestOutputReader;
 import ca.ucalgary.ensf380.maps.StationMapPanel;
+import ca.ucalgary.ensf380.maps.SmallMapPanel;
 import ca.ucalgary.ensf380.maps.ReadSubwayFile;
 import ca.ucalgary.ensf380.maps.Station;
 
@@ -21,6 +22,8 @@ public class SubwayScreen {
     private JPanel newsPanelContainer;
     private boolean showMapPanel = true;
     private Timer timer;
+    private SmallMapPanel smallMapPanel;
+    
 
     public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
         // Create a new JFrame
@@ -43,6 +46,7 @@ public class SubwayScreen {
 
             // Initialize the station map panel
             List<Station> stations = ReadSubwayFile.readStations();
+            smallMapPanel = new SmallMapPanel(stations, trainNumb);
             stationMapPanel = new StationMapPanel(stations, trainNumb);
             stationMapPanel.setPreferredSize(new Dimension(600, 450));
 
@@ -98,7 +102,7 @@ public class SubwayScreen {
             @Override
             public void run() {
             	// Step 4: Initialize LatestOutputReader and start updating train locations
-                LatestOutputReader latestOutputReader = new LatestOutputReader(stationMapPanel);
+                LatestOutputReader latestOutputReader = new LatestOutputReader(stationMapPanel, smallMapPanel);
                 Thread readerThread = new Thread(latestOutputReader);
                 readerThread.start();
                 SwingUtilities.invokeLater(() -> switchPanels());

@@ -17,9 +17,11 @@ public class LatestOutputReader implements Runnable {
     private static final int POLLING_INTERVAL = 15000;  // Polling interval in milliseconds
     private List<Train> trains = new ArrayList<>();  // List to store Train objects
     private StationMapPanel stationMapPanel;
+    private SmallMapPanel smallMapPanel;
 
-    public LatestOutputReader(StationMapPanel stationMapPanel) {
+    public LatestOutputReader(StationMapPanel stationMapPanel, SmallMapPanel smallMapPanel) {
         this.stationMapPanel = stationMapPanel;
+        this.smallMapPanel = smallMapPanel;
     }
 
     @Override
@@ -96,6 +98,7 @@ public class LatestOutputReader implements Runnable {
 
             // Notify the StationMapPanel about the updated train data
             stationMapPanel.updateTrains(newTrains);
+            smallMapPanel.updateTrain(newTrains);
 
 
         } catch (IOException e) {
