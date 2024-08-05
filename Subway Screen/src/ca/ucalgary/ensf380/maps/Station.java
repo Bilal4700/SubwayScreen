@@ -5,13 +5,15 @@ public class Station {
     private String stationCode;
     private double x;
     private double y;
+    private String stationName;
 
     // Constructor
-    public Station(int stationNumber, String stationCode, double x, double y) {
+    public Station(int stationNumber, String stationCode, double x, double y,String stationName) {
         this.stationNumber = stationNumber;
         this.stationCode = stationCode;
         this.x = x;
         this.y = y;
+        this.stationName = stationName;
     }
 
     // Getters and Setters
@@ -46,15 +48,24 @@ public class Station {
     public void setY(double y) {
         this.y = y;
     }
+    
+    public String getStationName() {
+        return stationName;
+    }
+
+    // Setter method for stationName
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
 
     // toString method
     @Override
     public String toString() {
         return "Station{" +
                 "stationNumber=" + stationNumber +
-                ", stationCode='" + stationCode + '\'' +
+                ", stationCode=" + stationCode + '\'' +
                 ", x=" + x +
-                ", y=" + y +
+                ", y=" + y +", stationName=" + stationName+
                 '}';
     }
 }

@@ -2,12 +2,9 @@ package ca.ucalgary.ensf380.maps;
 
 
 import javax.swing.*;
-
-
-
 import java.awt.*;
 import java.util.List;
-import java.util.ArrayList; // Ensure this import is present
+import java.util.ArrayList; 
 
 public class StationMapPanel extends JPanel {
     private List<Station> stations;
@@ -29,7 +26,7 @@ public class StationMapPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
      
-     // Draw stations
+ 
         for (Station station : stations) {
         	int x = (int) station.getX();
         	int y = (int) station.getY();
@@ -47,12 +44,10 @@ public class StationMapPanel extends JPanel {
             } else if (stationCode.startsWith("G")) {
                 g.setColor(Color.GREEN);
             } 
-
-            g.fillOval(X, Y, 6, 6); // Draw the dot
+            g.fillOval(X, Y, 6, 6);
         }
 
-        
-        // Draw trains
+       
         for (Train train : trains) {
             for (Station station : stations) {
                 String i = station.getStationCode();
@@ -69,7 +64,7 @@ public class StationMapPanel extends JPanel {
                         g.fillRect(X - 10, Y - 5, 20, 10);
                 	}else {
 	                    g.setColor(Color.BLACK);
-	                    g.fillRect(X - 10, Y - 5, 20, 10); // Draw the rectangle
+	                    g.fillRect(X - 10, Y - 5, 20, 10);
                 	}  
                 }
             }

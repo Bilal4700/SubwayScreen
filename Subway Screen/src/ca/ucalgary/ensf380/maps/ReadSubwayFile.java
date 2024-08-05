@@ -29,8 +29,9 @@ public class ReadSubwayFile {
                     String stationCode = parts[3];
                     double x = Double.parseDouble(parts[5]);
                     double y = Double.parseDouble(parts[6]);
+                    String stationName = parts[4];
 
-                    Station station = new Station(stationNumber, stationCode, x, y);
+                    Station station = new Station(stationNumber, stationCode, x, y, stationName);
                     stations.add(station);
                 }
 
