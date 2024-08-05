@@ -22,7 +22,7 @@ public class SubwayScreen {
     private boolean showMapPanel = true;
     private Timer timer;
 
-    public SubwayScreen(String city, String countrycode) throws Exception {
+    public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
         // Create a new JFrame
         frame = new JFrame("Subway Screen");
         frame.setSize(1000, 600);
@@ -43,7 +43,7 @@ public class SubwayScreen {
 
             // Initialize the station map panel
             List<Station> stations = ReadSubwayFile.readStations();
-            stationMapPanel = new StationMapPanel(stations);
+            stationMapPanel = new StationMapPanel(stations, trainNumb);
             stationMapPanel.setPreferredSize(new Dimension(600, 450));
 
         } catch (Exception e) {
@@ -103,7 +103,7 @@ public class SubwayScreen {
                 readerThread.start();
                 SwingUtilities.invokeLater(() -> switchPanels());
             }
-        }, 0, 15000); // Schedule the task to run every 15 seconds
+        }, 0, 10000); // Schedule the task to run every 15 seconds
     }
 
     private void switchPanels() {

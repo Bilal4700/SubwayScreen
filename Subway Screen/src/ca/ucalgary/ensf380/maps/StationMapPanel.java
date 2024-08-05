@@ -12,10 +12,12 @@ import java.util.ArrayList; // Ensure this import is present
 public class StationMapPanel extends JPanel {
     private List<Station> stations;
     private List<Train> trains;
+    private String trainNumb;
 
-    public StationMapPanel(List<Station> stations) {
+    public StationMapPanel(List<Station> stations, String trainNumb) {
         this.stations = stations;
         this.trains = new ArrayList<>(); // Initialize the ArrayList
+        this.trainNumb = trainNumb;
     }
 
     public synchronized void updateTrains(List<Train> newTrains) {
@@ -44,9 +46,7 @@ public class StationMapPanel extends JPanel {
                 g.setColor(Color.BLUE);
             } else if (stationCode.startsWith("G")) {
                 g.setColor(Color.GREEN);
-            } else {
-                g.setColor(Color.BLACK);
-            }
+            } 
 
             g.fillOval(X, Y, 6, 6); // Draw the dot
         }
@@ -56,17 +56,20 @@ public class StationMapPanel extends JPanel {
             for (Station station : stations) {
                 String i = station.getStationCode();
                 String atStation = train.getAtStation();
-
                 if (i.equals(atStation)) {
                 	int x = (int) station.getX();
                 	int y = (int) station.getY();
                 	double widthScale = 600.0 / 1200.0;
                 	double heightScale = 450.0 / 700.0;
-
                 	int X = (int) (x * widthScale);
                 	int Y = (int) (y * heightScale);
-                    g.setColor(Color.BLACK);
-                    g.fillRect(X - 10, Y - 5, 20, 10); // Draw the rectangle
+                	if (trainNumb == train.getTrainNum()) {
+                    	g.setColor(Color.ORANGE);
+                        g.fillRect(X - 10, Y - 5, 20, 10);
+                	}else {
+	                    g.setColor(Color.BLACK);
+	                    g.fillRect(X - 10, Y - 5, 20, 10); // Draw the rectangle
+                	}  
                 }
             }
         }

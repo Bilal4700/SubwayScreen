@@ -41,20 +41,20 @@ public class Main {
 
         // Step 3: Create and show the station map frame
         if (readSubwayFileCompleted) {
-            StationMapPanel stationMapPanel = new StationMapPanel(stations);
+           
 
-            if (args.length < 1 || args.length > 2) {
-                System.out.println("Error: Please provide one or two command-line arguments.");
+            if (args.length < 1 || args.length > 3) {
+                System.out.println("Error: Please provide two or three command-line arguments.");
                 System.out.println("Usage: java ca.ucalgary.ensf380.gui.SubwayScreen <city> [countrycode]");
                 return;
             }
 
             String city = args[0];
-            String countrycode = (args.length == 2) ? args[1] : null;
-
+            String countrycode = (args.length == 3) ? args[2] : null;
+            String trainNumb = args[1];
             SwingUtilities.invokeLater(() -> {
                 try {
-                    new SubwayScreen(city, countrycode);
+                    new SubwayScreen(city, trainNumb, countrycode);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
