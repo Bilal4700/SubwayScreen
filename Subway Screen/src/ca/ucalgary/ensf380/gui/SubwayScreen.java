@@ -15,7 +15,7 @@ public class SubwayScreen {
     public SubwayScreen(String city, String countrycode) {
         // Create a new JFrame
         frame = new JFrame("Subway Screen");
-        frame.setSize(900, 600);
+        frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
