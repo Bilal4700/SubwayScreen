@@ -5,7 +5,10 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * The News class is responsible for fetching the top news headlines
+ * from a specified country using the News API.
+ */
 public class News extends Fetcher {
 	
 	private String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
@@ -13,14 +16,43 @@ public class News extends Fetcher {
     private static final String API_KEY = "19705915eef84ed2af4ec71feda81a87";
 	private String news;
 	
+	
+	/*
+	 * Lemme explain why i made two constructor
+	 * One that is default is used when you dont provide the 3rd command line argument which is for news
+	 * It sets the country code to "ca" by default
+	 * 
+	 * Other is used when you provide the country code, it changes the country code to 3rd argument
+	 * 
+	 * You will later see its implementation in SubwayScreen class
+	 */
+	
+	
+    /**
+     * Default constructor for News class.
+     * Initializes the country code to "ca" (Canada).
+     */
 	public News() {
 		this.countryCode = "ca";
 	}
 	
+	
+    /**
+     * Constructor for News class with a specified country code.
+     *
+     * @param countryCode the country code for fetching news headlines
+     */
     public News(String countryCode) {
         this.countryCode = countryCode;
         
     }
+    
+    /**
+     * Fetches the top news headlines from the specified country using the News API.
+     * Extracts the author and title of each news article using regular expressions.
+     *
+     * @throws Exception if an error occurs during the fetch operation you can test it from TestNews class
+     */
     
     
     @Override
@@ -56,6 +88,10 @@ public class News extends Fetcher {
         }
 
     }
+    
+    /**
+     * @return the news headlines
+     */
     public String getNews() {
     	return news;
     }
