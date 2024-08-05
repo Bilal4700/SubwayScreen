@@ -97,7 +97,8 @@ public class WeatherAndTimePanel extends JPanel {
 
     public void updateTimeLabel() {
         // Get the current system time
-        currentTime = LocalTime.now();
+    	String time = weather.getTime();
+        currentTime = LocalTime.parse(time);
         // Format the new time and update the label
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
         timeLabel.setText("     Time: " + timeFormat.format(currentTime));
