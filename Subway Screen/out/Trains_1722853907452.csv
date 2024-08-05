@@ -1,0 +1,13 @@
+LineName,TrainNumber,StationCode,Direction,Destination
+R,1,R23,backward,R01
+R,2,R18,backward,R01
+R,3,R20,forward,R43
+R,4,R16,forward,R43
+B,5,B27,backward,B01
+B,6,B22,backward,B01
+B,7,B17,forward,B44
+B,8,B13,forward,B44
+G,9,G15,forward,G33
+G,10,G20,forward,G33
+G,11,G17,backward,G01
+G,12,G21,backward,G01

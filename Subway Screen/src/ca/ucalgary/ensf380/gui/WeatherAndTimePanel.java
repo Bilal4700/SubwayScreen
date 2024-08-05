@@ -81,19 +81,12 @@ public class WeatherAndTimePanel extends JPanel {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                SwingUtilities.invokeLater(() -> {
-					try {
-						updateTimeLabel();
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				});
+                SwingUtilities.invokeLater(() -> updateTimeLabel());
             }
         }, 0, 1000);
     }
 
-    public void updateWeatherAndTime() throws Exception {
+    public void updateWeatherAndTime() {
         locationLabel.setText(" "+weather.getLocation());
         tempLabel.setText("      "+weather.getConditionIcon() + " " + weather.getTemperature());
         windLabel.setText("    Wind  " + weather.getWind());
@@ -102,12 +95,13 @@ public class WeatherAndTimePanel extends JPanel {
         updateTimeLabel();
     }
 
-    public void updateTimeLabel() throws Exception {
+    public void updateTimeLabel() {
         // Get the current system time
-    	weather.fetch();
     	String time = weather.getTime();
-
-        timeLabel.setText("     Time: " + time);
+        currentTime = currentTime.plusSeconds(1);
+        // Format the new time and update the label
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+        timeLabel.setText("     Time: " + timeFormat.format(currentTime));
     }
 
     public JPanel getPanel() {
