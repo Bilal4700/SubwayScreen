@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2022-2023 Mahdi Jaberzadeh Ansari and others.
  * 
@@ -20,7 +21,11 @@
  *	OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  *	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.ucalgary.ensf380.simulations;
+
+package ca.ucalgary.ensf380.maps;
+
+
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,6 +62,7 @@ public class MyApp3 extends JFrame implements ActionListener {
         });
 
         outputArea = new JTextArea();
+        
         outputArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(outputArea);
         scrollPane.setPreferredSize(new Dimension(400, 300));
@@ -81,6 +87,7 @@ public class MyApp3 extends JFrame implements ActionListener {
         setVisible(true);
 
         executor = Executors.newFixedThreadPool(2);
+        
     }
 
     @Override
@@ -88,6 +95,7 @@ public class MyApp3 extends JFrame implements ActionListener {
         if (e.getSource() == startButton) {
             startProcess();
         } else if (e.getSource() == stopButton) {
+        	GlobBool.isApp3Done=false;
             stopProcess();
         }
     }
@@ -103,9 +111,9 @@ public class MyApp3 extends JFrame implements ActionListener {
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                         String line;
                         while ((line = reader.readLine()) != null) {
-                            System.out.println(line);
                             outputArea.append(line + "\n");
-                        }
+                            GlobBool.isApp3Done=true;
+                        }GlobBool.isApp3Done=true;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -140,8 +148,9 @@ public class MyApp3 extends JFrame implements ActionListener {
             startButton.setEnabled(true);
         }
     }
+    
 
-    public static void main(String[] args) {
+    public static void run() {
         SwingUtilities.invokeLater(MyApp3::new);
     }
 }

@@ -1,3 +1,5 @@
+
+
 /**
  * Copyright (c) 2022-2023 Mahdi Jaberzadeh Ansari and others.
  * 
@@ -20,7 +22,12 @@
  *	OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  *	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.ucalgary.ensf380.simulations;
+/**
+ * @author  Mahdi Ansari
+ *
+ */
+package ca.ucalgary.ensf380.maps;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,10 +35,8 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * @author  Mahdi Ansari
- *
- */
+
+
 public class MyApp1 {
 	public static void main(String[] args) {
         // Runs the simulator 

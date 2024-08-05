@@ -1,3 +1,5 @@
+
+
 /**
  * Copyright (c) 2022-2023 Mahdi Jaberzadeh Ansari and others.
  * 
@@ -20,7 +22,8 @@
  *	OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  *	WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package ca.ucalgary.ensf380.simulations;
+
+package ca.ucalgary.ensf380.maps;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -81,6 +84,7 @@ public class MyApp2 extends JFrame implements ActionListener {
             while ((line = reader.readLine()) != null) {
             	System.out.println(line);
                 outputTextArea.append(line + "\n");
+                
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,6 +17,13 @@ public class TestSubwayScreen {
         String city = args[0];
         String countrycode = (args.length == 2) ? args[1] : null;
 
-        SwingUtilities.invokeLater(() -> new SubwayScreen(city, countrycode));
+        SwingUtilities.invokeLater(() -> {
+			try {
+				new SubwayScreen(city, countrycode);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
     }
 }
