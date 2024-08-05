@@ -2,6 +2,10 @@ package ca.ucalgary.ensf380.maps;
 
 
 import javax.swing.*;
+
+import ca.ucalgary.edu.ensf380.Station;
+import ca.ucalgary.edu.ensf380.Train;
+
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList; // Ensure this import is present
@@ -13,7 +17,6 @@ public class StationMapPanel extends JPanel {
     public StationMapPanel(List<Station> stations) {
         this.stations = stations;
         this.trains = new ArrayList<>(); // Initialize the ArrayList
-        setPreferredSize(new Dimension(800, 600)); // Set preferred size for the panel
     }
 
     public synchronized void updateTrains(List<Train> newTrains) {
@@ -25,10 +28,15 @@ public class StationMapPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
      
-        // Draw stations
+     // Draw stations
         for (Station station : stations) {
-            int x = (int) station.getX();
-            int y = (int) station.getY();
+        	int x = (int) station.getX();
+        	int y = (int) station.getY();
+        	double widthScale = 600.0 / 1200.0;
+        	double heightScale = 450.0 / 700.0;
+
+        	int X = (int) (x * widthScale);
+        	int Y = (int) (y * heightScale);
             String stationCode = station.getStationCode();
 
             if (stationCode.startsWith("R")) {
@@ -41,8 +49,9 @@ public class StationMapPanel extends JPanel {
                 g.setColor(Color.BLACK);
             }
 
-            g.fillOval(x, y, 10, 10); // Draw the dot
+            g.fillOval(X, Y, 6, 6); // Draw the dot
         }
+
         // Draw trains
         for (Train train : trains) {
             for (Station station : stations) {
@@ -50,10 +59,15 @@ public class StationMapPanel extends JPanel {
                 String atStation = train.getAtStation();
 
                 if (i.equals(atStation)) {
-                    int X = (int) station.getX();
-                    int Y = (int) station.getY();
+                	int x = (int) station.getX();
+                	int y = (int) station.getY();
+                	double widthScale = 600.0 / 1200.0;
+                	double heightScale = 450.0 / 700.0;
+
+                	int X = (int) (x * widthScale);
+                	int Y = (int) (y * heightScale);
                     g.setColor(Color.BLACK);
-                    g.fillRect(X - 15, Y - 10, 30, 20); // Draw the rectangle
+                    g.fillRect(X - 10, Y - 5, 20, 10); // Draw the rectangle
                 }
             }
         }
