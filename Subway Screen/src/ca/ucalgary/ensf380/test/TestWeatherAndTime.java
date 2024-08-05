@@ -4,7 +4,7 @@ import ca.ucalgary.ensf380.components.WeatherAndTime;
 public class TestWeatherAndTime {
     public static void main(String[] args) {
         // Create an instance of WeatherAndTime for a specific location
-        WeatherAndTime weather = new WeatherAndTime("Toronto,CA");
+        WeatherAndTime weather = new WeatherAndTime("Toronto");
 
         // Fetch weather data
         try {
