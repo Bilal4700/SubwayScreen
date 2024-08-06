@@ -9,7 +9,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-       
+    	
+        if (args.length < 1 || args.length > 2) {
+            System.out.println("Error: Please provide two or three command-line arguments.");
+            System.out.println("Usage: java ca.ucalgary.ensf380.gui.SubwayScreen [city] [trainnums] [countrycode] ");
+            return;
+        }
+        String city = args[0];
+        String countrycode = (args.length == 3) ? args[2] : null;
+        String trainNumb = args[1];
         // Step 1: Run MyApp3 and ensure it completes
             try {
                 MyApp3.run();
@@ -25,17 +33,8 @@ public class Main {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        // Step 3: Create and show the station map frame
-            if (args.length < 1 || args.length > 3) {
-                System.out.println("Error: Please provide two or three command-line arguments.");
-                System.out.println("Usage: java ca.ucalgary.ensf380.gui.SubwayScreen [city] [trainnums] [countrycode] ");
-                return;
-            }
-
-            String city = args[0];
-            String countrycode = (args.length == 3) ? args[2] : null;
-            String trainNumb = args[1];
+        
+         // Step 3: Create and show the station map frame
             SwingUtilities.invokeLater(() -> {
                 try {
                     new SubwayScreen(city, trainNumb, countrycode);

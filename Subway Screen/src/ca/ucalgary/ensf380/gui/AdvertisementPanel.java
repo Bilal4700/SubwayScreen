@@ -38,7 +38,7 @@ public class AdvertisementPanel {
             gifPaths = new ArrayList<>();
         }
 
-        // Set up a timer to cycle through gifs
+        // Set up a timer to cycle through Gifs
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
