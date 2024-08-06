@@ -15,7 +15,6 @@ public class LatestOutputReader implements Runnable {
 
     private static final String OUTPUT_DIRECTORY = "./out";  // Directory where output files are stored
     private static final int POLLING_INTERVAL = 15000;  // Polling interval in milliseconds
-    private List<Train> trains = new ArrayList<>();  // List to store Train objects
     private StationMapPanel stationMapPanel;
     private SmallMapPanel smallMapPanel;
 
@@ -93,7 +92,6 @@ public class LatestOutputReader implements Runnable {
 
             // Update the class-level trains list
             synchronized (this) {
-                this.trains = newTrains;
             }
 
             // Notify the StationMapPanel about the updated train data
@@ -106,8 +104,5 @@ public class LatestOutputReader implements Runnable {
         }
     }
 
-    // Getter method for the trains list
-    public synchronized List<Train> getTrains() {
-        return new ArrayList<>(trains);
-    }
+    
 }

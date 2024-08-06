@@ -28,7 +28,7 @@ public class SubwayScreen {
     public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
         // Create a new JFrame
         frame = new JFrame("Subway Screen");
-        frame.setSize(1000, 600);
+        frame.setSize(1000, 850);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
@@ -47,8 +47,10 @@ public class SubwayScreen {
             // Initialize the station map panel
             List<Station> stations = ReadSubwayFile.readStations();
             smallMapPanel = new SmallMapPanel(stations, trainNumb);
+            smallMapPanel.setPreferredSize(new Dimension(600, 200));
             stationMapPanel = new StationMapPanel(stations, trainNumb);
             stationMapPanel.setPreferredSize(new Dimension(600, 450));
+            
 
         } catch (Exception e) {
             System.out.println("Error initializing panels: " + e.getMessage());
@@ -88,6 +90,7 @@ public class SubwayScreen {
 
         // Add news panel container to the frame
         frame.add(newsPanelContainer);
+        frame.add(smallMapPanel);
 
         // Start the panel switcher timer
         startPanelSwitcher();
