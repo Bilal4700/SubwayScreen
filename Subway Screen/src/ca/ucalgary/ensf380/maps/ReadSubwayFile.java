@@ -6,9 +6,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ReadSubwayFile class provides functionality to read subway station data from a CSV file.
+ */
 public class ReadSubwayFile {
     private static final String CSV_FILE_PATH = "./data/subway.csv";
 
+    
+    /** 
+     * @return a list of Station objects read from the CSV file
+     */
     public static List<Station> readStations() {
         List<Station> stations = new ArrayList<>();
 

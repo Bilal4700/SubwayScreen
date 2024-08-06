@@ -4,6 +4,17 @@ import ca.ucalgary.ensf380.maps.*;
 import ca.ucalgary.ensf380.gui.*;
 import javax.swing.SwingUtilities;
 
+
+/**
+ * The Main class initializes and runs the SubwayScreen application.
+ * It takes command-line arguments for the city, train number, and an optional country code for news.
+ * The application displays weather, time, train locations, and news in a GUI.
+ *
+ * <p>Authors:
+ * <br>Muhammad Bilal UCID: 30188943
+ * <br>Fateh Bukhari UCID: 30123431
+ * </p>
+ */
 public class Main {
 	
 

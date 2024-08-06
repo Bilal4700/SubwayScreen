@@ -13,6 +13,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The SubwayScreen class creates a GUI for displaying subway information, including advertisements, weather, time, news
+ * Staation Map, Small Map
+ * It makes a frame by combining all the panels.
+ */
+
 public class SubwayScreen {
     private JFrame frame;
     private WeatherAndTimePanel weatherAndTimePanel;
@@ -25,6 +31,17 @@ public class SubwayScreen {
     private SmallMapPanel smallMapPanel;
     
 
+    /**
+     * Constructs a SubwayScreen with the specified city, train number, and country code.
+     * Initializes various panels and starts the panel switcher timer.
+     * These are command line argument
+     * 
+     * @param city :  name of the city you want to know Weather and Time data
+     * @param trainNumb : the train number you want to follow
+     * @param countrycode : the country code for fetching news 
+     * @throws Exception 
+     */
+    
     public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
         // Create a new JFrame
         frame = new JFrame("Subway Screen");

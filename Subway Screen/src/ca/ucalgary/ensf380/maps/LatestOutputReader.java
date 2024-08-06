@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The LatestOutputReader class reads the latest output file from out directory
+ * at regular intervals of 15 seconds and updates the train information on the provided map panels.
+ */
 public class LatestOutputReader implements Runnable {
 
     private static final String OUTPUT_DIRECTORY = "./out";  // Directory where output files are stored
@@ -18,15 +22,32 @@ public class LatestOutputReader implements Runnable {
     private StationMapPanel stationMapPanel;
     private SmallMapPanel smallMapPanel;
 
+    /**
+     * Constructs a LatestOutputReader with the specified map panels.
+     * 
+     * @param stationMapPanel the panel displaying the station map
+     * @param smallMapPanel the panel displaying the small map
+     */
+    
     public LatestOutputReader(StationMapPanel stationMapPanel, SmallMapPanel smallMapPanel) {
         this.stationMapPanel = stationMapPanel;
         this.smallMapPanel = smallMapPanel;
     }
 
+    
+    /**
+     * Runs the LatestOutputReader in a separate thread.
+     * Continuously polls for the latest output file and updates the train information.
+     */
     @Override
     public void run() {
         startReading();
     }
+    
+    /**
+     * Starts reading the latest output file at regular intervals.
+     * Updates the train information if a new file is found.
+     */
 
     public void startReading() {
         File lastFile = null;
@@ -50,6 +71,14 @@ public class LatestOutputReader implements Runnable {
             }
         }
     }
+    
+    /**
+     * Finds the latest modified file in the specified directory.
+     * 
+     * @param dirPath the path to the directory
+     * @return the latest modified file, or null if no files are found
+     * @throws IOException if an I/O error occurs
+     */
 
     private static File findLatestFile(String dirPath) throws IOException {
         return Files.list(Paths.get(dirPath))
@@ -58,6 +87,12 @@ public class LatestOutputReader implements Runnable {
                 .map(Path::toFile)
                 .orElse(null);
     }
+    
+    /**
+     * Reads the content of the specified file and updates the train information.
+     * 
+     * @param file the file to be read
+     */
 
     private synchronized void readAndStoreFile(File file) {
         List<Train> newTrains = new ArrayList<>();

@@ -22,6 +22,10 @@ public class Advertisement extends Fetcher{
     
     public Advertisement() {
     }
+    
+    /**
+     * Create Connection
+     */
 
     public void createConnection(){
         try {

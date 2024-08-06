@@ -5,6 +5,9 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The SmallMapPanel class creates a JPanel that displays information about the current, previous, and next stations for a specified train.
+ */
 public class SmallMapPanel extends JPanel {
     private List<Station> stations;
     private List<Train> trains;
@@ -26,6 +29,13 @@ public class SmallMapPanel extends JPanel {
     private JLabel label9;
     private JLabel label10;
 
+    
+    /**
+     * Constructs a SmallMapPanel with the specified stations and train number.
+     * 
+     * @param stations the list of stations
+     * @param trainNumb the train number to highlight
+     */
     public SmallMapPanel(List<Station> stations, String trainNumb ) {
         this.stations = stations;
         this.trains = new ArrayList<>();
@@ -55,12 +65,20 @@ public class SmallMapPanel extends JPanel {
         add(label9);
         add(label10);
     }
-
+    /**
+     * Updates the train information and repaints the panel.
+     * 
+     * @param newTrains the new list of trains
+     */
     public synchronized void updateTrain(List<Train> newTrains) {
         this.trains = newTrains;
         repaint();
     }
-
+    /**
+     * Paints the component, including the station and train information.
+     * 
+     * @param g the Graphics object used for painting
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -111,7 +129,6 @@ public class SmallMapPanel extends JPanel {
                         label10.setText(nextStation1);
                         label10.setBounds(530, 150, 300, 60);
                         
-
                         break;
                     }
                 }

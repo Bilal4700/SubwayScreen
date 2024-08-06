@@ -10,6 +10,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import ca.ucalgary.ensf380.components.WeatherAndTime;
 
+/**
+ * The WeatherAndTimePanel class creates a JPanel that displays weather information and the current time for a specified city.
+ */
 public class WeatherAndTimePanel extends JPanel {
 
     private JLabel locationLabel;
@@ -21,17 +24,32 @@ public class WeatherAndTimePanel extends JPanel {
     private WeatherAndTime weather;
     private LocalTime currentTime;
     public String city;
+    
+    /**
+     * Constructs a WeatherAndTimePanel with the specified city.
+     * initialize gui
+     * 
+     * @param city the name of the city for which to display weather information
+     * @throws Exception if error 
+     */
 
     public WeatherAndTimePanel(String city) throws Exception {
         this.city = city;
         initializeUI();
     }
+    
+    /**
+     * Initializes the UI components and fetches the weather data.
+     * Sets up the panel layout and starts the timer for updating the time.
+     * 
+     * @throws Exception if an error occurs during initialization
+     */
 
     public void initializeUI() throws Exception {
         // Fetching Weather Data
         weather = new WeatherAndTime(city);
         weather.fetch();
-        // Parse the initial time from the fetched weather data
+        // Changed the initial time from the fetched weather data to LocalTime format so we can later run it
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
         currentTime = LocalTime.parse(weather.getTime(), timeFormat);
 
@@ -85,6 +103,10 @@ public class WeatherAndTimePanel extends JPanel {
             }
         }, 0, 1000);
     }
+    
+    /**
+     * Updates the weather information labels.
+     */
 
     public void updateWeatherAndTime() {
         locationLabel.setText(" "+weather.getLocation());
@@ -94,6 +116,12 @@ public class WeatherAndTimePanel extends JPanel {
 
         updateTimeLabel();
     }
+    
+    /**
+     * We got the time of location in string form and we changed it into LocalTime Format so we can add 1 secind
+     * after we call it again
+     * Check the timer code above it calls this method every second
+     */
 
     public void updateTimeLabel() {
         // Get the current system time
@@ -103,6 +131,10 @@ public class WeatherAndTimePanel extends JPanel {
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
         timeLabel.setText("     Time: " + timeFormat.format(currentTime));
     }
+    
+    /**
+     * @return the JPanel containing the weather and time display
+     */
 
     public JPanel getPanel() {
         return contentPanel;
