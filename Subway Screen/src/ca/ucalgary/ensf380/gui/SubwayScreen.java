@@ -110,7 +110,7 @@ public class SubwayScreen {
                 readerThread.start();
                 SwingUtilities.invokeLater(() -> switchPanels());
             }
-        }, 0, 10000); // Schedule the task to run every 15 seconds
+        }, 0, 10000); // Schedule the task to run every 10 seconds
     }
 
     private void switchPanels() {

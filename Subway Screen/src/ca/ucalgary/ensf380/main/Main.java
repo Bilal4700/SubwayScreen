@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
     	
-        if (args.length < 1 || args.length > 2) {
+        if (args.length < 1 || args.length > 3) {
             System.out.println("Error: Please provide two or three command-line arguments.");
             System.out.println("Usage: java ca.ucalgary.ensf380.gui.SubwayScreen [city] [trainnums] [countrycode] ");
             return;

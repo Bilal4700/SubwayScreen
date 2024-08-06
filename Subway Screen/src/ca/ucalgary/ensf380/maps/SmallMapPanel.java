@@ -109,7 +109,7 @@ public class SmallMapPanel extends JPanel {
                         label9.setText("The Next Station is: ");
                         label9.setBounds(408, 150, 300, 60);
                         label10.setText(nextStation1);
-                        label10.setBounds(516, 150, 300, 60);
+                        label10.setBounds(530, 150, 300, 60);
                         
 
                         break;
