@@ -19,8 +19,7 @@ public class LatestOutputReader implements Runnable {
 
     private static final String OUTPUT_DIRECTORY = "./out";  // Directory where output files are stored
     private static final int POLLING_INTERVAL = 15000;  // Polling interval in milliseconds
-    private StationMapPanel stationMapPanel;
-    private SmallMapPanel smallMapPanel;
+    private List<Train> newTrains; // List to store Train objects
 
     /**
      * Constructs a LatestOutputReader with the specified map panels.
@@ -29,9 +28,9 @@ public class LatestOutputReader implements Runnable {
      * @param smallMapPanel the panel displaying the small map
      */
     
-    public LatestOutputReader(StationMapPanel stationMapPanel, SmallMapPanel smallMapPanel) {
-        this.stationMapPanel = stationMapPanel;
-        this.smallMapPanel = smallMapPanel;
+    public LatestOutputReader() {
+        
+        this.newTrains = new ArrayList<>();
     }
 
     
@@ -128,15 +127,32 @@ public class LatestOutputReader implements Runnable {
             // Update the class-level trains list
             synchronized (this) {
             }
-
-            // Notify the StationMapPanel about the updated train data
-            stationMapPanel.updateTrains(newTrains);
-            smallMapPanel.updateTrain(newTrains);
+            
+         // Update the class-level trains list
+            setNewTrains(newTrains);
+            
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * Getter for the newTrains list.
+     * 
+     * @return the list of Train objects
+     */
+    public synchronized List<Train> getNewTrains() {
+        return this.newTrains;
+    }
+
+    /**
+     * Setter for the newTrains list.
+     * 
+     * @param newTrains the list of Train objects to set
+     */
+    public synchronized void setNewTrains(List<Train> newTrains) {
+        this.newTrains = new ArrayList<>(newTrains);
     }
 
     

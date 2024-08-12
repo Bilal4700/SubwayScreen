@@ -2,11 +2,7 @@ package ca.ucalgary.ensf380.gui;
 
 import javax.swing.*;
 import ca.ucalgary.ensf380.components.News;
-import ca.ucalgary.ensf380.maps.LatestOutputReader;
-import ca.ucalgary.ensf380.maps.StationMapPanel;
-import ca.ucalgary.ensf380.maps.SmallMapPanel;
-import ca.ucalgary.ensf380.maps.ReadSubwayFile;
-import ca.ucalgary.ensf380.maps.Station;
+import ca.ucalgary.ensf380.maps.*;
 
 import java.awt.*;
 import java.util.List;
@@ -15,7 +11,7 @@ import java.util.TimerTask;
 
 /**
  * The SubwayScreen class creates a GUI for displaying subway information, including advertisements, weather, time, news
- * Staation Map, Small Map
+ * Station Map, Small Map
  * It makes a frame by combining all the panels.
  */
 
@@ -29,12 +25,11 @@ public class SubwayScreen {
     private boolean showMapPanel = true;
     private Timer timer;
     private SmallMapPanel smallMapPanel;
-    
 
     /**
      * Constructs a SubwayScreen with the specified city, train number, and country code.
      * Initializes various panels and starts the panel switcher timer.
-     * These are command line argument
+     * These are command line arguments.
      * 
      * @param city :  name of the city you want to know Weather and Time data
      * @param trainNumb : the train number you want to follow
@@ -63,21 +58,20 @@ public class SubwayScreen {
 
             // Initialize the station map panel
             List<Station> stations = ReadSubwayFile.readStations();
-            smallMapPanel = new SmallMapPanel(stations, trainNumb);
-            smallMapPanel.setPreferredSize(new Dimension(600, 200));
             stationMapPanel = new StationMapPanel(stations, trainNumb);
-            stationMapPanel.setPreferredSize(new Dimension(600, 450));
-            
+            stationMapPanel.setPreferredSize(new Dimension(600, 450)); // Adjust size as necessary
+            smallMapPanel = new SmallMapPanel(stations, trainNumb);
+            smallMapPanel.setPreferredSize(new Dimension(600, 200)); // Adjust size as necessary
 
         } catch (Exception e) {
             System.out.println("Error initializing panels: " + e.getMessage());
         }
 
         try {
-            // Initialize and add the weather and time panel
+            /*// Initialize and add the weather and time panel
             weatherAndTimePanel = new WeatherAndTimePanel(city);
-            weatherAndTimePanel.getPanel().setPreferredSize(new Dimension(250, 450)); // Decrease size of weather panel
-            topPanel.add(weatherAndTimePanel.getPanel());
+            weatherAndTimePanel.getPanel().setPreferredSize(new Dimension(300, 450)); // Decrease size of weather panel
+            topPanel.add(weatherAndTimePanel.getPanel());*/
         } catch (Exception e) {
             System.out.println("Error initializing WeatherAndTimePanel: " + e.getMessage());
         }
@@ -121,14 +115,21 @@ public class SubwayScreen {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-            	// Step 4: Initialize LatestOutputReader and start updating train locations
-                LatestOutputReader latestOutputReader = new LatestOutputReader(stationMapPanel, smallMapPanel);
-                Thread readerThread = new Thread(latestOutputReader);
-                readerThread.start();
-                SwingUtilities.invokeLater(() -> switchPanels());
+                SwingUtilities.invokeLater(() -> {
+                    // Update the train data directly using the latest output reader
+                    List<Train> latestTrains = stationMapPanel.getLatestOutputReader().getNewTrains();
+                    stationMapPanel.updateTrains(latestTrains);
+                    
+                    // Assuming smallMapPanel needs to update train data similarly
+                    smallMapPanel.updateTrain(latestTrains);
+
+                    // Switch panels
+                    switchPanels();
+                });
             }
         }, 0, 10000); // Schedule the task to run every 10 seconds
     }
+
 
     private void switchPanels() {
         topPanel.removeAll();
@@ -143,6 +144,4 @@ public class SubwayScreen {
         topPanel.revalidate();
         topPanel.repaint();
     }
-
-
 }

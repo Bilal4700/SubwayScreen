@@ -2,6 +2,8 @@ package ca.ucalgary.ensf380.maps;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,6 +14,7 @@ public class SmallMapPanel extends JPanel {
     private List<Station> stations;
     private List<Train> trains;
     private String trainNumb;
+    private LatestOutputReader latestOutputReader; 
     private String previousStation = null;
     private String currentStationName;
     private String nextStation1;
@@ -23,11 +26,11 @@ public class SmallMapPanel extends JPanel {
     private JLabel labelNextStation1;
     private JLabel labelNextStation2;
     private JLabel labelNextStation3;
-    private JLabel label6;
-    private JLabel label7;
-    private JLabel label8;
-    private JLabel label9;
-    private JLabel label10;
+    private JLabel strPrevious;
+    private JLabel strCurrent;
+    private JLabel strNextSta;
+    private JLabel strUpComing;
+    private JLabel strNextStation1;
 
     
     /**
@@ -40,6 +43,22 @@ public class SmallMapPanel extends JPanel {
         this.stations = stations;
         this.trains = new ArrayList<>();
         this.trainNumb = trainNumb;
+        this.latestOutputReader = new LatestOutputReader(); // Initialize LatestOutputReader
+
+        // Start the LatestOutputReader in a separate thread
+        Thread readerThread = new Thread(latestOutputReader);
+        readerThread.start(); 
+
+        // Set up a timer to update the train data periodically
+        Timer timer = new Timer(5000, new ActionListener() { // Update every 5 seconds
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTrain(latestOutputReader.getNewTrains()); // Update trains from the latest output
+                
+            }
+        });
+        timer.start(); // Start the timer
+    
 
         setLayout(new GridLayout(5, 1)); 
 
@@ -48,22 +67,22 @@ public class SmallMapPanel extends JPanel {
         labelNextStation1 = new JLabel();
         labelNextStation2 = new JLabel();
         labelNextStation3 = new JLabel();
-        label6 = new JLabel();
-        label7 = new JLabel();
-        label8 = new JLabel();
-        label9 = new JLabel();
-        label10 = new JLabel();
+        strPrevious = new JLabel();
+        strCurrent = new JLabel();
+        strNextSta = new JLabel();
+        strUpComing = new JLabel();
+        strNextStation1 = new JLabel();
         
         add(labelPreviousStation);
         add(labelCurrentStation);
         add(labelNextStation1);
         add(labelNextStation2);
         add(labelNextStation3);
-        add(label6);
-        add(label7);
-        add(label8);
-        add(label9);
-        add(label10);
+        add(strPrevious);
+        add(strCurrent);
+        add(strNextSta);
+        add(strUpComing);
+        add(strNextStation1);
     }
     /**
      * Updates the train information and repaints the panel.
@@ -118,16 +137,16 @@ public class SmallMapPanel extends JPanel {
                         labelNextStation2.setBounds(578, 90, 300, 60);
                         labelNextStation3.setText(nextStation3);
                         labelNextStation3.setBounds(714, 115, 300, 60);
-                        label6.setText("Previous: ");
-                        label6.setBounds(190, 5, 300, 60);
-                        label7.setText("Current: ");
-                        label7.setBounds(326, 5, 300, 60);
-                        label8.setText("UpComing....");
-                        label8.setBounds(462, 5, 300, 60);
-                        label9.setText("The Next Station is: ");
-                        label9.setBounds(408, 150, 300, 60);
-                        label10.setText(nextStation1);
-                        label10.setBounds(530, 150, 300, 60);
+                        strPrevious.setText("Previous: ");
+                        strPrevious.setBounds(190, 5, 300, 60);
+                        strCurrent.setText("Current: ");
+                        strCurrent.setBounds(326, 5, 300, 60);
+                        strNextSta.setText("UpComing....");
+                        strNextSta.setBounds(462, 5, 300, 60);
+                        strUpComing.setText("The Next Station is: ");
+                        strUpComing.setBounds(408, 150, 300, 60);
+                        strNextStation1.setText(nextStation1);
+                        strNextStation1.setBounds(530, 150, 300, 60);
                         
                         break;
                     }
