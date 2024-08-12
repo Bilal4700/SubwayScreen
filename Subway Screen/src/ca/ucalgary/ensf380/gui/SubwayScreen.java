@@ -68,10 +68,10 @@ public class SubwayScreen {
         }
 
         try {
-            /*// Initialize and add the weather and time panel
+            // Initialize and add the weather and time panel
             weatherAndTimePanel = new WeatherAndTimePanel(city);
             weatherAndTimePanel.getPanel().setPreferredSize(new Dimension(300, 450)); // Decrease size of weather panel
-            topPanel.add(weatherAndTimePanel.getPanel());*/
+            topPanel.add(weatherAndTimePanel.getPanel());
         } catch (Exception e) {
             System.out.println("Error initializing WeatherAndTimePanel: " + e.getMessage());
         }
