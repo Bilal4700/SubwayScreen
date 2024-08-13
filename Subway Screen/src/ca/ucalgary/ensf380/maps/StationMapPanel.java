@@ -1,60 +1,49 @@
 package ca.ucalgary.ensf380.maps;
 
 import javax.swing.*;
+
+import ca.ucalgary.ensf380.data.DataProvider;
+
 import java.awt.*;
-import java.util.List;
-import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The StationMapPanel class creates a JPanel that displays a map of stations and highlights trains.
  */
 public class StationMapPanel extends JPanel {
-    private List<Station> stations;
-    private List<Train> trains;
+    private List<Station> stationslist;
+    private List<Train> trainslist;
     private String trainNumb;
-    private LatestOutputReader latestOutputReader; 
+    private DataProvider dataProvider;
 
     /**
-     * Constructs a StationMapPanel with the specified list of stations and train number to highlight.
+     * Constructs a StationMapPanel with the specified DataProvider and train number to highlight.
      * 
-     * @param stations the list of stations
+     * @param dataProvider the DataProvider instance to fetch stations and trains
      * @param trainNumb the train number to highlight
      */
-    public StationMapPanel(List<Station> stations, String trainNumb) {
-        this.stations = stations;
+    public StationMapPanel(DataProvider dataProvider, String trainNumb) {
+        this.dataProvider = dataProvider;
+        this.stationslist = dataProvider.getStations();
         this.trainNumb = trainNumb;
-        this.latestOutputReader = new LatestOutputReader(); // Initialize LatestOutputReader
+        this.trainslist = new ArrayList<>(); // Initialize to an empty list
 
-        // Start the LatestOutputReader in a separate thread
-        Thread readerThread = new Thread(latestOutputReader);
-        readerThread.start(); 
-
-        // Set up a timer to update the train data periodically
+        // Start reading trains in a separate thread
+        dataProvider.startReadingTrains();
+     // Set up a timer to update the train data periodically
         Timer timer = new Timer(5000, new ActionListener() { // Update every 5 seconds
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateTrains(latestOutputReader.getNewTrains()); // Update trains from the latest output
-                
+                updateTrains(dataProvider.getTrains()); // Update trains from the latest output
             }
         });
         timer.start(); // Start the timer
     }
-
-
     /**
-     * Updates the list of trains and repaints the panel to reflect the updated train data.
-     * 
-     * @param newTrains the new list of trains
-     */
-    public synchronized void updateTrains(List<Train> newTrains) {
-        this.trains = newTrains;
-        repaint(); // Repaint the panel to reflect the updated train data
-    }
-
-
-    /**
+     * Paints the stations and trains on the panel.
      * 
      * @param g the Graphics object used for painting
      */
@@ -63,7 +52,7 @@ public class StationMapPanel extends JPanel {
         super.paintComponent(g);
 
         // Paints every station with an oval of the respective colors of the line
-        for (Station station : stations) {
+        for (Station station : stationslist) {
             int x = (int) station.getX();
             int y = (int) station.getY();
             double widthScale = 600.0 / 1200.0;
@@ -84,8 +73,8 @@ public class StationMapPanel extends JPanel {
         }
 
         // Paints the station with a rectangle where there is a train. Selected train is orange; others are black
-        for (Train train : trains) {
-            for (Station station : stations) {
+        for (Train train : trainslist) {
+            for (Station station : stationslist) {
                 String i = station.getStationCode();
                 String atStation = train.getAtStation();
                 if (i.equals(atStation)) {
@@ -106,7 +95,13 @@ public class StationMapPanel extends JPanel {
             }
         }
     }
-    public LatestOutputReader getLatestOutputReader() {
-        return latestOutputReader;
+
+    public synchronized void updateTrains(List<Train> newTrains) {
+        this.trainslist = newTrains;
+        repaint(); // Repaint the panel to reflect the updated train data
     }
+    
+	public List<Train> getTrains() {
+		return trainslist;
+	}
 }

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import ca.ucalgary.ensf380.maps.SmallMapPanel;
 import ca.ucalgary.ensf380.maps.Station;
-import ca.ucalgary.ensf380.maps.StationMapPanel;
 import ca.ucalgary.ensf380.maps.Train;
 import ca.ucalgary.ensf380.data.DataProvider;
 
-public class StationMapPanelTest {
+public class SmallMapPanelTest {
 
-    private StationMapPanel stationMapPanel;
+    private SmallMapPanel smallMapPanel;
     private DataProvider dataProvider;
 
     @Before
@@ -24,6 +24,7 @@ public class StationMapPanelTest {
                 List<Station> stations = new ArrayList<>();
                 stations.add(new Station(1, "R1", 100, 100, "Red Line 1"));
                 stations.add(new Station(2, "B1", 200, 200, "Blue Line 1"));
+                stations.add(new Station(3, "G1", 300, 300, "Green Line 1"));
                 return stations;
             }
 
@@ -40,8 +41,8 @@ public class StationMapPanelTest {
             }
         };
 
-        // Initialize the StationMapPanel with the mock DataProvider
-        stationMapPanel = new StationMapPanel(dataProvider, "Train1");
+        // Initialize the SmallMapPanel with the mock DataProvider
+        smallMapPanel = new SmallMapPanel(dataProvider, "Train1");
     }
 
     @Test
@@ -49,24 +50,24 @@ public class StationMapPanelTest {
         // Ensure that the stations are loaded correctly
         List<Station> stations = dataProvider.getStations();
         assertNotNull("Stations list should not be null", stations);
-        assertEquals("Stations list should have 2 stations", 2, stations.size());
+        assertEquals("Stations list should have 3 stations", 3, stations.size());
 
         // Ensure that the initial train list in the panel is empty
-        assertEquals("Initial train list should be empty", 0, stationMapPanel.getTrains().size());
+        assertEquals("Initial train list should be empty", 0, smallMapPanel.getTrains().size());
     }
 
     @Test
-    public void testUpdateTrains() {
+    public void testUpdateTrain() {
         // Create a new list of trains
         List<Train> newTrains = new ArrayList<>();
         newTrains.add(new Train("Train2", "B1", "forward"));
 
-        // Update the trains in the StationMapPanel
-        stationMapPanel.updateTrains(newTrains);
+        // Update the trains in the SmallMapPanel
+        smallMapPanel.updateTrain(newTrains);
 
         // Verify that the trains were updated correctly
-        assertEquals("Trains list should have 1 train", 1, stationMapPanel.getTrains().size());
-        assertEquals("First train should be Train2", "Train2", stationMapPanel.getTrains().get(0).getTrainNum());
+        assertEquals("Trains list should have 1 train", 1, smallMapPanel.getTrains().size());
+        assertEquals("First train should be Train2", "Train2", smallMapPanel.getTrains().get(0).getTrainNum());
     }
 
     @Test
@@ -80,8 +81,8 @@ public class StationMapPanelTest {
         // behavior by logging or using a framework like Mockito.
 
         // Example:
-        stationMapPanel.updateTrains(dataProvider.getTrains());
-        stationMapPanel.repaint();
+        smallMapPanel.updateTrain(dataProvider.getTrains());
+        smallMapPanel.repaint();
         // Further validation would be needed to assert the correct drawing.
     }
 }

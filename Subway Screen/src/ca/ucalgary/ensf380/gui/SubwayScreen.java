@@ -3,6 +3,7 @@ package ca.ucalgary.ensf380.gui;
 import javax.swing.*;
 import ca.ucalgary.ensf380.components.News;
 import ca.ucalgary.ensf380.maps.*;
+import ca.ucalgary.ensf380.data.DataProvider;
 
 import java.awt.*;
 import java.util.List;
@@ -22,9 +23,10 @@ public class SubwayScreen {
     private StationMapPanel stationMapPanel;
     private JPanel topPanel;
     private JPanel newsPanelContainer;
-    private boolean showMapPanel = true;
+    private boolean showMapPanel = false;
     private Timer timer;
     private SmallMapPanel smallMapPanel;
+    private DataProvider dataProvider;
 
     /**
      * Constructs a SubwayScreen with the specified city, train number, and country code.
@@ -50,17 +52,21 @@ public class SubwayScreen {
         topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 20));
 
         try {
+            // Initialize DataProvider
+            dataProvider = new DataProvider();
+
             // Initialize and add the advertisement panel
             advertisementPanel = new AdvertisementPanel();
             advertisementPanel.getPanel().setPreferredSize(new Dimension(600, 450)); // Increase size of advertisement panel
             topPanel.add(advertisementPanel.getPanel());
             topPanel.setBackground(Color.DARK_GRAY);
 
-            // Initialize the station map panel
-            List<Station> stations = ReadSubwayFile.readStations();
-            stationMapPanel = new StationMapPanel(stations, trainNumb);
+            // Initialize the station map panel with DataProvider
+            stationMapPanel = new StationMapPanel(dataProvider, trainNumb);
             stationMapPanel.setPreferredSize(new Dimension(600, 450)); // Adjust size as necessary
-            smallMapPanel = new SmallMapPanel(stations, trainNumb);
+
+            // Initialize the small map panel with DataProvider
+            smallMapPanel = new SmallMapPanel(dataProvider, trainNumb);
             smallMapPanel.setPreferredSize(new Dimension(600, 200)); // Adjust size as necessary
 
         } catch (Exception e) {
@@ -116,11 +122,10 @@ public class SubwayScreen {
             @Override
             public void run() {
                 SwingUtilities.invokeLater(() -> {
-                    // Update the train data directly using the latest output reader
-                    List<Train> latestTrains = stationMapPanel.getLatestOutputReader().getNewTrains();
-                    stationMapPanel.updateTrains(latestTrains);
+                    // Get the latest train data from the DataProvider
+                    List<Train> latestTrains = dataProvider.getTrains();
                     
-                    // Assuming smallMapPanel needs to update train data similarly
+                    // Update the train data for SmallMapPanel
                     smallMapPanel.updateTrain(latestTrains);
 
                     // Switch panels
@@ -129,7 +134,6 @@ public class SubwayScreen {
             }
         }, 0, 10000); // Schedule the task to run every 10 seconds
     }
-
 
     private void switchPanels() {
         topPanel.removeAll();
