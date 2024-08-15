@@ -4,18 +4,14 @@ import javax.swing.*;
 import ca.ucalgary.ensf380.components.News;
 import ca.ucalgary.ensf380.maps.*;
 import ca.ucalgary.ensf380.data.DataProvider;
-
 import java.awt.*;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * The SubwayScreen class creates a GUI for displaying subway information, including advertisements, weather, time, news
- * Station Map, Small Map
- * It makes a frame by combining all the panels.
+ * The SubwayScreen class creates a GUI for displaying subway information, including advertisements, weather, time, news,
+ * Station Map, Small Map. It makes a frame by combining all the panels.
  */
-
 public class SubwayScreen {
     private JFrame frame;
     private WeatherAndTimePanel weatherAndTimePanel;
@@ -27,19 +23,21 @@ public class SubwayScreen {
     private Timer timer;
     private SmallMapPanel smallMapPanel;
     private DataProvider dataProvider;
+    private String trainNumb;
 
     /**
      * Constructs a SubwayScreen with the specified city, train number, and country code.
      * Initializes various panels and starts the panel switcher timer.
      * These are command line arguments.
      * 
-     * @param city :  name of the city you want to know Weather and Time data
-     * @param trainNumb : the train number you want to follow
-     * @param countrycode : the country code for fetching news 
-     * @throws Exception 
+     * @param city        the name of the city you want to know Weather and Time data
+     * @param trainNumb   the train number you want to follow
+     * @param countrycode the country code for fetching news
+     * @throws Exception
      */
-    
     public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
+        this.trainNumb = trainNumb;
+
         // Create a new JFrame
         frame = new JFrame("Subway Screen");
         frame.setSize(1000, 850);
@@ -122,12 +120,6 @@ public class SubwayScreen {
             @Override
             public void run() {
                 SwingUtilities.invokeLater(() -> {
-                    // Get the latest train data from the DataProvider
-                    List<Train> latestTrains = dataProvider.getTrains();
-                    
-                    // Update the train data for SmallMapPanel
-                    smallMapPanel.updateTrain(latestTrains);
-
                     // Switch panels
                     switchPanels();
                 });

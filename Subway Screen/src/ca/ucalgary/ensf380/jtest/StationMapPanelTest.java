@@ -3,7 +3,6 @@ package ca.ucalgary.ensf380.jtest;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 import ca.ucalgary.ensf380.maps.Station;
 import ca.ucalgary.ensf380.maps.StationMapPanel;
@@ -12,13 +11,10 @@ import ca.ucalgary.ensf380.data.DataProvider;
 
 public class StationMapPanelTest {
 
-    private StationMapPanel stationMapPanel;
-    private DataProvider dataProvider;
-
-    @Before
-    public void setUp() {
+    @Test
+    public void testInitialSetup() {
         // Initialize a mock DataProvider
-        dataProvider = new DataProvider() {
+        DataProvider dataProvider = new DataProvider() {
             @Override
             public List<Station> getStations() {
                 List<Station> stations = new ArrayList<>();
@@ -41,11 +37,8 @@ public class StationMapPanelTest {
         };
 
         // Initialize the StationMapPanel with the mock DataProvider
-        stationMapPanel = new StationMapPanel(dataProvider, "Train1");
-    }
+        StationMapPanel stationMapPanel = new StationMapPanel(dataProvider, "Train1");
 
-    @Test
-    public void testInitialSetup() {
         // Ensure that the stations are loaded correctly
         List<Station> stations = dataProvider.getStations();
         assertNotNull("Stations list should not be null", stations);
@@ -57,6 +50,32 @@ public class StationMapPanelTest {
 
     @Test
     public void testUpdateTrains() {
+        // Initialize a mock DataProvider
+        DataProvider dataProvider = new DataProvider() {
+            @Override
+            public List<Station> getStations() {
+                List<Station> stations = new ArrayList<>();
+                stations.add(new Station(1, "R1", 100, 100, "Red Line 1"));
+                stations.add(new Station(2, "B1", 200, 200, "Blue Line 1"));
+                return stations;
+            }
+
+            @Override
+            public List<Train> getTrains() {
+                List<Train> trains = new ArrayList<>();
+                trains.add(new Train("Train1", "R1", "forward"));
+                return trains;
+            }
+
+            @Override
+            public void startReadingTrains() {
+                // Mock implementation, no real thread will be started
+            }
+        };
+
+        // Initialize the StationMapPanel with the mock DataProvider
+        StationMapPanel stationMapPanel = new StationMapPanel(dataProvider, "Train1");
+
         // Create a new list of trains
         List<Train> newTrains = new ArrayList<>();
         newTrains.add(new Train("Train2", "B1", "forward"));
@@ -71,17 +90,37 @@ public class StationMapPanelTest {
 
     @Test
     public void testPaintComponent() {
-        // This is a more complex test that would require verifying the drawing behavior
-        // It would involve creating a custom Graphics object or mocking the Graphics
-        // class to check that the correct drawing methods are called.
+        // Initialize a mock DataProvider
+        DataProvider dataProvider = new DataProvider() {
+            @Override
+            public List<Station> getStations() {
+                List<Station> stations = new ArrayList<>();
+                stations.add(new Station(1, "R1", 100, 100, "Red Line 1"));
+                stations.add(new Station(2, "B1", 200, 200, "Blue Line 1"));
+                return stations;
+            }
 
-        // This part of the test is more advanced and typically requires a more
-        // sophisticated setup. For now, you might simulate the call and observe
-        // behavior by logging or using a framework like Mockito.
+            @Override
+            public List<Train> getTrains() {
+                List<Train> trains = new ArrayList<>();
+                trains.add(new Train("Train1", "R1", "forward"));
+                return trains;
+            }
 
-        // Example:
+            @Override
+            public void startReadingTrains() {
+                // Mock implementation, no real thread will be started
+            }
+        };
+
+        // Initialize the StationMapPanel with the mock DataProvider
+        StationMapPanel stationMapPanel = new StationMapPanel(dataProvider, "Train1");
+
+        // Simulate the call to updateTrains and repaint
         stationMapPanel.updateTrains(dataProvider.getTrains());
         stationMapPanel.repaint();
+
         // Further validation would be needed to assert the correct drawing.
+        // This might involve more complex setup or a custom Graphics object.
     }
 }

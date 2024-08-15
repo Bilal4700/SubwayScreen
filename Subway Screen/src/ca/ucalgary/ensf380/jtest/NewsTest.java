@@ -6,23 +6,20 @@ import org.junit.Test;
 import ca.ucalgary.ensf380.components.News;
 
 public class NewsTest {
-
     private News news;
 
-    @Before
-    public void setUp() {
-        // Setting up with default country code "ca"
-        news = new News();
-    }
+   
 
     @Test
     public void testDefaultConstructor() {
+    	news = new News();
         // Check if the default constructor sets the country code to "ca"
         assertEquals("ca", news.countryCode);
     }
 
     @Test
     public void testParameterizedConstructor() {
+    	news = new News();
         // Check if the parameterized constructor sets the country code correctly
         News newsWithCountryCode = new News("us");
         assertEquals("us", newsWithCountryCode.countryCode);
@@ -30,6 +27,7 @@ public class NewsTest {
 
     @Test
     public void testFetchNews() throws Exception {
+    	news = new News();
         // Fetch news with default country code "ca"
         news.fetch();
         String fetchedNews = news.getNews();
@@ -41,6 +39,7 @@ public class NewsTest {
 
     @Test
     public void testFetchNewsWithDifferentCountry() throws Exception {
+    	news = new News();
         // Fetch news with a different country code "us"
         News newsWithCountryCode = new News("us");
         newsWithCountryCode.fetch();
@@ -53,6 +52,7 @@ public class NewsTest {
 
     @Test
     public void testGetNews() throws Exception {
+    	news = new News();
         // Fetch news and check if getNews() returns it correctly
         news.fetch();
         String fetchedNews = news.getNews();

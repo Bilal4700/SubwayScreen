@@ -9,7 +9,7 @@ import javax.net.ssl.HttpsURLConnection;
  * The WeatherAndTime class is responsible for fetching weather conditions and current time
  * for a specified location using the wttr.in API.
  */
-public class WeatherAndTime extends Fetcher {
+public class WeatherAndTime implements Fetcher {
     private String location;
     private String conditionIcon;
     private String temperature;

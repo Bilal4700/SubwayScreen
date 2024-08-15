@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * The News class is responsible for fetching the top news headlines
  * from a specified country using the News API.
  */
-public class News extends Fetcher {
+public class News implements Fetcher {
 	
 	private String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
 	public  String countryCode ;

@@ -124,9 +124,7 @@ public class LatestOutputReader implements Runnable {
                 lineNumber++;
             }
 
-            // Update the class-level trains list
-            synchronized (this) {
-            }
+           
             
          // Update the class-level trains list
             setNewTrains(newTrains);

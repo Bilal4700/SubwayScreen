@@ -1,174 +1,83 @@
 package ca.ucalgary.ensf380.maps;
 
 import javax.swing.*;
-
 import ca.ucalgary.ensf380.data.DataProvider;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.ArrayList;
 
-/**
- * The SmallMapPanel class creates a JPanel that displays information about the current, previous, and next stations for a specified train.
- */
 public class SmallMapPanel extends JPanel {
-    private List<Station> stationsList;
-    private List<Train> trainsList;
-    private String trainNumb;
     private DataProvider dataProvider;
-    private String previousStation = null;
-    private String currentStationName;
-    private String nextStation1;
-    private String nextStation2;
-    private String nextStation3;
-
+    private String trainNumb;
     private JLabel labelPreviousStation;
     private JLabel labelCurrentStation;
     private JLabel labelNextStation1;
     private JLabel labelNextStation2;
     private JLabel labelNextStation3;
-    private JLabel strPrevious;
-    private JLabel strCurrent;
-    private JLabel strNextSta;
-    private JLabel strUpComing;
-    private JLabel strNextStation1;
-
-    /**
-     * Constructs a SmallMapPanel with the specified DataProvider and train number.
-     * 
-     * @param dataProvider the DataProvider instance to fetch stations and trains
-     * @param trainNumb the train number to highlight
-     */
+    
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        updateStationInfo();
+        for (int xpoint = 80; xpoint <= 900; xpoint++) {
+            g.setColor(Color.DARK_GRAY);
+            g.fillOval(xpoint, 70, 10, 10);
+        }
+        for (int xpoint = 216; xpoint <= 800; xpoint += 136) {
+            g.setColor(Color.DARK_GRAY);
+            g.fillOval(xpoint - 10, 60, 30, 30);
+        }
+        g.setColor(Color.RED);
+        g.fillOval(342, 60, 30, 30);
+        g.fillOval(332, 61, 50, 30);
+    }
+    
+    
     public SmallMapPanel(DataProvider dataProvider, String trainNumb) {
         this.dataProvider = dataProvider;
-        this.stationsList = dataProvider.getStations();
         this.trainNumb = trainNumb;
-        this.trainsList = new ArrayList<>(); // Initialize to an empty list
 
-        // Start reading trains in a separate thread
-        dataProvider.startReadingTrains();
 
-        // Set up a timer to update the train data periodically
-        Timer timer = new Timer(5000, new ActionListener() { // Update every 5 seconds
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTrain(dataProvider.getTrains()); // Update trains from the latest output
-            }
-        });
-        timer.start(); // Start the timer
+        labelPreviousStation = new JLabel("Previous: N/A");
+        labelCurrentStation = new JLabel("Current: N/A");
+        labelNextStation1 = new JLabel("Next 1: N/A");
+        labelNextStation2 = new JLabel("Next 2: N/A");
+        labelNextStation3 = new JLabel("Next 3: N/A");
 
-        setLayout(new GridLayout(5, 1)); 
-
-        labelPreviousStation = new JLabel();
-        labelCurrentStation = new JLabel();
-        labelNextStation1 = new JLabel();
-        labelNextStation2 = new JLabel();
-        labelNextStation3 = new JLabel();
-        strPrevious = new JLabel();
-        strCurrent = new JLabel();
-        strNextSta = new JLabel();
-        strUpComing = new JLabel();
-        strNextStation1 = new JLabel();
-        
         add(labelPreviousStation);
         add(labelCurrentStation);
         add(labelNextStation1);
         add(labelNextStation2);
         add(labelNextStation3);
-        add(strPrevious);
-        add(strCurrent);
-        add(strNextSta);
-        add(strUpComing);
-        add(strNextStation1);
+
+        dataProvider.startReadingTrains();
+        
+        Timer timer = new Timer(5000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateStationInfo();
+            }
+        });
+        timer.start();
     }
 
-    /**
-     * Updates the train information and repaints the panel.
-     * 
-     * @param newTrains the new list of trains
-     */
-    public synchronized void updateTrain(List<Train> newTrains) {
-        this.trainsList = newTrains;
-        repaint();
-    }
-
-    /**
-     * Paints the component, including the station and train information.
-     * 
-     * @param g the Graphics object used for painting
-     */
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        for (Train train : trainsList) {
-            if (trainNumb.equals(train.getTrainNum())) {
-                for (Station station : stationsList) {
-                    if (train.getAtStation().equals(station.getStationCode())) {
-                        currentStationName = station.getStationName();
-                        String trainDirection = train.getTrainDirection();
-                        int currentIndex = stationsList.indexOf(station);
-                        if (trainDirection.equals("forward")) {
-                            if (currentIndex - 1 >= 0) {
-                                previousStation = stationsList.get(currentIndex - 1).getStationName();
-                            }
-                            nextStation1 = stationsList.get(currentIndex + 1).getStationName();
-                            nextStation2 = stationsList.get(currentIndex + 2).getStationName();
-                            nextStation3 = stationsList.get(currentIndex + 3).getStationName();
-                        } else {
-                            if (currentIndex + 1 < stationsList.size()) {
-                                previousStation = stationsList.get(currentIndex + 1).getStationName();
-                            }
-                            nextStation1 = stationsList.get(currentIndex - 1).getStationName();
-                            nextStation2 = stationsList.get(currentIndex - 2).getStationName();
-                            nextStation3 = stationsList.get(currentIndex - 3).getStationName();
-                        }
-
-                        labelPreviousStation.setText(previousStation);
-                        labelPreviousStation.setBounds(170, 115, 300, 60);
-                        labelCurrentStation.setText(currentStationName);
-                        labelCurrentStation.setForeground(new Color(0xFF0000)); 
-                        labelCurrentStation.setBounds(306, 90, 300, 60);
-                        labelNextStation1.setText(nextStation1);
-                        labelNextStation1.setBounds(442, 115, 300, 60);
-                        labelNextStation2.setText(nextStation2);
-                        labelNextStation2.setBounds(578, 90, 300, 60);
-                        labelNextStation3.setText(nextStation3);
-                        labelNextStation3.setBounds(714, 115, 300, 60);
-                        strPrevious.setText("Previous: ");
-                        strPrevious.setBounds(190, 5, 300, 60);
-                        strCurrent.setText("Current: ");
-                        strCurrent.setBounds(326, 5, 300, 60);
-                        strNextSta.setText("UpComing....");
-                        strNextSta.setBounds(462, 5, 300, 60);
-                        strUpComing.setText("The Next Station is: ");
-                        strUpComing.setBounds(408, 150, 300, 60);
-                        strNextStation1.setText(nextStation1);
-                        strNextStation1.setBounds(530, 150, 300, 60);
-
-                        break;
-                    }
-                }
-            }
-
-            for (int xpoint = 80; xpoint <= 900; xpoint++) {
-                g.setColor(Color.DARK_GRAY);
-                g.fillOval(xpoint, 70, 10, 10);
-            }
-            for (int xpoint = 216; xpoint <= 800; xpoint += 136) {
-                g.setColor(Color.DARK_GRAY);
-                g.fillOval(xpoint - 10, 60, 30, 30);
-            }
-            g.setColor(Color.RED);
-            g.fillOval(342, 60, 30, 30);
-            g.fillOval(332, 61, 50, 30);
+    private void updateStationInfo() {
+        List<String> stationNames = dataProvider.getStationNamesForTrain(trainNumb);
+        if (!stationNames.isEmpty()) {
+        	labelPreviousStation.setText(stationNames.get(1));
+        	labelPreviousStation.setBounds(165, 115, 300, 60);
+            labelCurrentStation.setText(stationNames.get(0));
+            labelCurrentStation.setForeground(new Color(0xFF0000)); 
+            labelCurrentStation.setBounds(300, 90, 300, 60);
+            labelNextStation1.setText(stationNames.get(2));
+            labelNextStation1.setBounds(437, 115, 300, 60);
+            labelNextStation2.setText(stationNames.get(3));
+            labelNextStation2.setBounds(573, 90, 300, 60);
+            labelNextStation3.setText(stationNames.get(4));
+            labelNextStation3.setBounds(709, 115, 300, 60);
+            
         }
     }
-
-	public List<Train> getTrains() {
-		// TODO Auto-generated method stub
-		return trainsList;
-	}
 }

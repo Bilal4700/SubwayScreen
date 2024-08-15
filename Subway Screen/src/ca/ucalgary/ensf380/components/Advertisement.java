@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 
-public class Advertisement extends Fetcher{
+public class Advertisement implements Fetcher{
     private Connection dbConnect;
     private ResultSet results;
     private String adPaths;
