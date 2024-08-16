@@ -6,6 +6,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
+ * @author Muhammad Bilal
  * The News class is responsible for fetching the top news headlines
  * from a specified country using the News API.
  */

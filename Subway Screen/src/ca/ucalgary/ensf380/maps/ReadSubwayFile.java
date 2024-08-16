@@ -7,19 +7,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Fateh Ali
  * The ReadSubwayFile class provides functionality to read subway station data from a CSV file.
  */
 public class ReadSubwayFile {
-    private static final String CSV_FILE_PATH = "./data/subway.csv";
+    private String csvFilePath;
 
-    
-    /** 
-     * @return a list of Station objects read from the CSV file
+    /**
+     * Constructor that initializes the ReadSubwayFile with a specified file path.
+     * 
+     * @param csvFilePath the path to the CSV file containing subway station data.
      */
-    public static List<Station> readStations() {
+    public ReadSubwayFile() {
+        this.csvFilePath = "./data/subway.csv";
+    }
+    
+    /**
+     * for Junit test
+     * @param csvFilePath
+     */
+    public ReadSubwayFile(String csvFilePath) {
+        this.csvFilePath = csvFilePath;
+    }
+
+    /**
+     * Reads station data from the specified CSV file.
+     * 
+     * @return a list of Station objects read from the CSV file.
+     */
+    public List<Station> readStations() {
         List<Station> stations = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             int lineNumber = 0;
 
@@ -50,6 +69,4 @@ public class ReadSubwayFile {
 
         return stations;
     }
-
-    
 }

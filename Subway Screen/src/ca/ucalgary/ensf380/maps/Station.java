@@ -2,6 +2,7 @@ package ca.ucalgary.ensf380.maps;
 
 
 /**
+ * @author Fateh Ali
  * The Station class represents a subway station with a number, Station code, coordinates, and name.
  */
 public class Station {

@@ -1,6 +1,7 @@
 package ca.ucalgary.ensf380.maps;
 
 /**
+ * @author Fateh Ali
  * The Train class represents a train with a number, direction, and current station.
  */
 public class Train {

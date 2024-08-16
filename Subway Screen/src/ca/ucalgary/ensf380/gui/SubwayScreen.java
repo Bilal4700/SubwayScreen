@@ -9,8 +9,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * The SubwayScreen class creates a GUI for displaying subway information, including advertisements, weather, time, news,
- * Station Map, Small Map. It makes a frame by combining all the panels.
+ * @author Fateh Ali, Muhammad Bilal
+ * The SubwayScreen class creates a GUI for displaying subway information, 
+ * including advertisements, weather, time, news, station maps, and a small map.
+ * It combines all the panels into a single JFrame and handles the switching 
+ * between different panels.
  */
 public class SubwayScreen {
     private JFrame frame;
@@ -28,12 +31,11 @@ public class SubwayScreen {
     /**
      * Constructs a SubwayScreen with the specified city, train number, and country code.
      * Initializes various panels and starts the panel switcher timer.
-     * These are command line arguments.
      * 
-     * @param city        the name of the city you want to know Weather and Time data
-     * @param trainNumb   the train number you want to follow
-     * @param countrycode the country code for fetching news
-     * @throws Exception
+     * @param city        the name of the city for which to display weather and time data.
+     * @param trainNumb   the train number to monitor and display on the map.
+     * @param countrycode the country code for fetching news.
+     * @throws Exception if an error occurs during panel initialization.
      */
     public SubwayScreen(String city, String trainNumb, String countrycode) throws Exception {
         this.trainNumb = trainNumb;
@@ -114,6 +116,10 @@ public class SubwayScreen {
         frame.setVisible(true);
     }
 
+    /**
+     * Starts a Timer that switches between the advertisement panel and the station map panel
+     * every 10 seconds. The weather and time panel remains visible throughout.
+     */
     private void startPanelSwitcher() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -127,6 +133,10 @@ public class SubwayScreen {
         }, 0, 10000); // Schedule the task to run every 10 seconds
     }
 
+    /**
+     * Switches between displaying the advertisement panel and the station map panel
+     * on the top panel of the JFrame.
+     */
     private void switchPanels() {
         topPanel.removeAll();
         if (showMapPanel) {

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 /**
+ * @author Muhammad Bilal
  * The WeatherAndTime class is responsible for fetching weather conditions and current time
  * for a specified location using the wttr.in API.
  */

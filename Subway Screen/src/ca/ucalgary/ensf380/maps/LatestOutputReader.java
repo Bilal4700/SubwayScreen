@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * @author Fateh Ali
  * The LatestOutputReader class reads the latest output file from out directory
  * at regular intervals of 15 seconds and updates the train information on the provided map panels.
  */

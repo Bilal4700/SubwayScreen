@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
+ * @author Muhammad Bilal
  * The Advertisement class is responsible for managing the connection to the database
  * and fetching the paths of GIF advertisements. It also allows for inserting new advertisements
  * into the database.

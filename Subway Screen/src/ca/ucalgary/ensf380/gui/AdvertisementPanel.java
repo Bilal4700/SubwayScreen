@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import ca.ucalgary.ensf380.components.Advertisement;
 
 /**
+ * @author Muhammad Bilal
  * The AdvertisementPanel class manages a JPanel that displays advertisements in the form of GIFs.
  * It uses the advertisement paths from a database and cycles through them at regular intervals
  * that are produced in Advertisement Class.

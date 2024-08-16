@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * @author Muhammad Bilal
  * The NewsPanel class creates a JPanel that displays a scrolling news ticker.
  * The text scrolls from right to left at a specified speed.
  */

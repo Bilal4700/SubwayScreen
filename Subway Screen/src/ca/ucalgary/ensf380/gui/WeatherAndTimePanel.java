@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import ca.ucalgary.ensf380.components.WeatherAndTime;
 
 /**
+ * @author Muhammad Bilal
  * The WeatherAndTimePanel class creates a JPanel that displays weather information and the current time for a specified city.
  */
 public class WeatherAndTimePanel extends JPanel {
