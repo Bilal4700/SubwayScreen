@@ -12,10 +12,12 @@ import java.util.regex.Pattern;
  */
 public class News implements Fetcher {
 	
-	private String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
+	private static final String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
 	public  String countryCode ;
     private static final String API_KEY = "19705915eef84ed2af4ec71feda81a87";
 	private String news;
+	private static final Pattern PATTERN = Pattern.compile(REGEX);
+	
 	
 	
 	/*
@@ -75,8 +77,8 @@ public class News implements Fetcher {
             }
 
 
-            Pattern pattern = Pattern.compile(REGEX);
-            Matcher matcher = pattern.matcher(sb.toString());
+            
+            Matcher matcher = PATTERN.matcher(sb.toString());
             while (matcher.find()) {
 
                 String author = matcher.group(1); 

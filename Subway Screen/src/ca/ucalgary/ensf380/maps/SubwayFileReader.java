@@ -8,17 +8,17 @@ import java.util.List;
 
 /**
  * @author Fateh Ali
- * The ReadSubwayFile class provides functionality to read subway station data from a CSV file.
+ * The SubwayFileReader class provides functionality to read subway station data from a CSV file.
  */
-public class ReadSubwayFile {
+public class SubwayFileReader {
     private String csvFilePath;
 
     /**
-     * Constructor that initializes the ReadSubwayFile with a specified file path.
+     * Constructor that initializes the SubwayFileReader with a specified file path.
      * 
      * @param csvFilePath the path to the CSV file containing subway station data.
      */
-    public ReadSubwayFile() {
+    public SubwayFileReader() {
         this.csvFilePath = "./data/subway.csv";
     }
     
@@ -26,7 +26,7 @@ public class ReadSubwayFile {
      * for Junit test
      * @param csvFilePath
      */
-    public ReadSubwayFile(String csvFilePath) {
+    public SubwayFileReader(String csvFilePath) {
         this.csvFilePath = csvFilePath;
     }
 

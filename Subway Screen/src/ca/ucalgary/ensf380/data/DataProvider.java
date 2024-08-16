@@ -19,12 +19,12 @@ public class DataProvider {
     /**
      * Constructs a DataProvider object. This constructor initializes the 
      * LatestOutputReader and retrieves the list of stations from the 
-     * ReadSubwayFile class.
+     * SubwayFileReader class.
      */
     public DataProvider() {
         this.latestOutputReader = new LatestOutputReader();
-     // Create an instance of ReadSubwayFile
-        ReadSubwayFile reader = new ReadSubwayFile();
+     // Create an instance of SubwayFileReader
+        SubwayFileReader reader = new SubwayFileReader();
         this.stations = reader.readStations();
     }
 

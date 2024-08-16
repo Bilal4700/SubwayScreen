@@ -18,6 +18,7 @@ public class WeatherAndTime implements Fetcher {
     private String humidity;
     private String time;
     
+    
     /**
      * Constructor for WeatherAndTime class.
      *

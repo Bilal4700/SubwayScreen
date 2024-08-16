@@ -2,7 +2,7 @@ package ca.ucalgary.ensf380.jtest;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import ca.ucalgary.ensf380.maps.ReadSubwayFile;
+import ca.ucalgary.ensf380.maps.SubwayFileReader;
 import ca.ucalgary.ensf380.maps.Station;
 
 import java.io.BufferedWriter;
@@ -11,11 +11,11 @@ import java.util.List;
 
 /**
  * @author Fateh Ali
- * Tests for the ReadSubwayFile class.
+ * Tests for the SubwayFileReader class.
  * Ensures that station data is correctly read from a CSV file.
  * 
  */
-public class ReadSubwayFileTest {
+public class SubwayFileReaderTest {
 
     private static final String TEST_CSV_FILE_PATH = "./data/test_subway.csv";
 
@@ -32,7 +32,7 @@ public class ReadSubwayFileTest {
     }
 
     /**
-     * Tests the readStations method of the ReadSubwayFile class.
+     * Tests the readStations method of the SubwayFileReader class.
      * Verifies that the method correctly reads station data from the CSV file
      * and returns a list of Station objects.
      */
@@ -41,11 +41,11 @@ public class ReadSubwayFileTest {
         // Create a temporary CSV file
         createTestCSVFile();
 
-        // Initialize ReadSubwayFile with the path to the test CSV file
-        ReadSubwayFile readSubwayFile = new ReadSubwayFile(TEST_CSV_FILE_PATH);
+        // Initialize SubwayFileReader with the path to the test CSV file
+        SubwayFileReader SubwayFileReader = new SubwayFileReader(TEST_CSV_FILE_PATH);
 
         // Read stations from the test CSV file
-        List<Station> stations = readSubwayFile.readStations();
+        List<Station> stations = SubwayFileReader.readStations();
 
         // Verify the number of stations read
         assertEquals("The number of stations read should be 3", 3, stations.size());

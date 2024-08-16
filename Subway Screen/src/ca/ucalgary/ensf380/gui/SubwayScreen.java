@@ -9,7 +9,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @author Fateh Ali, Muhammad Bilal
  * The SubwayScreen class creates a GUI for displaying subway information, 
  * including advertisements, weather, time, news, station maps, and a small map.
  * It combines all the panels into a single JFrame and handles the switching 
@@ -22,13 +21,15 @@ public class SubwayScreen {
     private StationMapPanel stationMapPanel;
     private JPanel topPanel;
     private JPanel newsPanelContainer;
-    private boolean showMapPanel = false;
+    private boolean showMapPanel = true;
     private Timer timer;
     private SmallMapPanel smallMapPanel;
     private DataProvider dataProvider;
+    private NewsPanel newsPanel; 
     private String trainNumb;
 
     /**
+     * @author Muhammad Bilal, Fateh Ali
      * Constructs a SubwayScreen with the specified city, train number, and country code.
      * Initializes various panels and starts the panel switcher timer.
      * 
@@ -98,9 +99,9 @@ public class SubwayScreen {
                 news = new News(); // Default constructor with "ca"
             }
             news.fetch();
-            String myNews = news.getNews();
-            NewsPanel newsPanel = new NewsPanel(myNews);
-            newsPanelContainer.add(newsPanel.getPanel());
+            // NewsPanel is now part of SubwayScreen's composition
+            this.newsPanel = new NewsPanel(news);
+            newsPanelContainer.add(this.newsPanel.getPanel());
         } catch (Exception e) {
             System.out.println("Error initializing NewsPanel: " + e.getMessage());
         }

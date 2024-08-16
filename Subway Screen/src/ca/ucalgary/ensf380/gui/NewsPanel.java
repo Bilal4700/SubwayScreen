@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import ca.ucalgary.ensf380.components.News;
 
 /**
  * @author Muhammad Bilal
@@ -17,13 +18,12 @@ public class NewsPanel extends JPanel implements ActionListener {
     private Timer timer;
 
     /**
-     * Constructs a NewsPanel with the specified news text.
+     * Constructs a NewsPanel with the specified news object.
      * 
-     * @param Stronf of news text that is fetched in News class
+     * @param news the News object that fetches and provides the news text
      */
-    
-    public NewsPanel(String text) {
-        this.newsText = text;
+    public NewsPanel(News news) {
+        this.newsText = news.getNews();
         this.xCoordinate = getWidth();
         this.timer = new Timer(30, this);  // Adjust the delay as needed
         this.timer.start();
@@ -34,7 +34,6 @@ public class NewsPanel extends JPanel implements ActionListener {
      * 
      * @param g the Graphics object used for painting
      */
-    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -42,7 +41,6 @@ public class NewsPanel extends JPanel implements ActionListener {
         g.drawString(newsText, xCoordinate, getHeight() / 2);
     }
 
-    
     /**
      * Updates the x-coordinate of the text to create the scrolling effect.
      * 
@@ -56,21 +54,13 @@ public class NewsPanel extends JPanel implements ActionListener {
         }
         repaint();
     }
+
     /**
      * Returns the JPanel managed by this class.
      * 
      * @return the JPanel containing the scrolling news ticker
      */
-
-
     public JPanel getPanel() {
         return this;
     }
-    
-    
-    /**
-     * You can see the impleementation of this in TestNewsClass
-     */
 }
-
-

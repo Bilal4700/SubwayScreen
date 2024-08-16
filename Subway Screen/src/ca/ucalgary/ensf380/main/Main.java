@@ -13,13 +13,14 @@ import javax.swing.SwingUtilities;
  * @author Muhammad Bilal UCID: 30188943 Fateh Bukhari UCID: 30123431
  * 
  * 
- * 
- * 
  */
 public class Main {
+	private static String city;
+	private static String countrycode;
+	private static String trainNumb;
 	
-
     public static void main(String[] args) {
+    
 
     	
         if (args.length < 1 || args.length > 3) {
@@ -27,9 +28,9 @@ public class Main {
             System.out.println("Usage: java ca.ucalgary.ensf380.gui.SubwayScreen [city] [trainnums] [countrycode] ");
             return;
         }
-        String city = args[0];
-        String countrycode = (args.length == 3) ? args[2] : null;
-        String trainNumb = args[1];
+        city = args[0];
+        countrycode = (args.length == 3) ? args[2] : null;
+        trainNumb = args[1];
         // Step 1: Run MyApp3 and ensure it completes
             try {
                 MyApp3.run();
