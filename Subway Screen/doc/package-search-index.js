@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ca.ucalgary.ensf380.components"},{"l":"ca.ucalgary.ensf380.data"},{"l":"ca.ucalgary.ensf380.gui"},{"l":"ca.ucalgary.ensf380.jtest"},{"l":"ca.ucalgary.ensf380.main"},{"l":"ca.ucalgary.ensf380.maps"}];updateSearchResults();
