@@ -12,10 +12,10 @@ import java.util.regex.Pattern;
  */
 public class News implements Fetcher {
 	
-	private static final String REGEX = "\"author\":\\s*\"([^\"]*)\",\\s*\"title\":\\s*\"([^\"]*)\"";
+	private static final String REGEX = "(?:\"author\"\\s*:\\s*\"([^\"]*)\"\\s*,\\s*)?\"title\"\\s*:\\s*\"([^\"]*)\"";
 	public  String countryCode ;
-    private static final String API_KEY = "19705915eef84ed2af4ec71feda81a87";
-	private String news;
+    private static final String API_KEY = "eb92e682e4994af1a0ce7f83e8c4ffbf";
+	private String news = "";
 	private static final Pattern PATTERN = Pattern.compile(REGEX);
 	
 	
@@ -60,8 +60,7 @@ public class News implements Fetcher {
     
     @Override
     public void fetch() throws Exception {
-
-        final String API_URL = "https://newsapi.org/v2/top-headlines?country=" + countryCode + "&apiKey=" + API_KEY;
+        final String API_URL = "https://api.worldnewsapi.com/search-news?source-country=" + countryCode + "&api-key=" + API_KEY;
         URL urlObj = new URL(API_URL);
         HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
         connection.setRequestMethod("GET");
@@ -83,7 +82,7 @@ public class News implements Fetcher {
 
                 String author = matcher.group(1); 
                 String title = matcher.group(2); 
-                this.news +=  author + ": " + title + "\n";
+                this.news +=  ((author == null || author.isEmpty()) ? "" : author + ": ") + title + "\n";
 
 
             }
@@ -101,4 +100,3 @@ public class News implements Fetcher {
       
 
 }
-

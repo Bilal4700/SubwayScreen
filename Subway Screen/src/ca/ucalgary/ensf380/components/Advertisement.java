@@ -31,7 +31,7 @@ public class Advertisement implements Fetcher{
     public void createConnection(){
         try {
             // Corrected JDBC URL for syntax
-            dbConnect = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/advertisement_db", "admin", "subwayscreen");
+            dbConnect = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/advertisement_db", "root", "bilal1234");
         } catch (SQLException e) {
             e.printStackTrace();
         }
