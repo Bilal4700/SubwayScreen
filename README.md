@@ -2,7 +2,7 @@
 
 This project is a desktop simulation of a subway system in **Calgary**, built entirely in **Java**. It provides a live, interactive view of trains moving across a subway map and allows you to explore additional real-time information like weather forecasts and news updates — all in one place.
 
-👉 **[📺 Watch the Video Demo]()**
+👉 **[📺 Watch the Video Demo](https://youtu.be/M22Fni-hTZ0)**
 
 ---
 
