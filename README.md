@@ -1,40 +1,21 @@
-AUTHORS:
-Muhammad Bilal 30188943
-Fateh Ali Syed Bukhari 30123431
+# 🚇 Calgary Subway Simulation System
 
-SUBWAY SCREEN PROJECT
-GitHub: https://github.com/Bilal4700/SubwayScreen.git
-THIS PROJECT MAKES A GUI WHICH SHOWS LIVE TRAIN MOVEMENTS , WEATHER AND 
-TIME AND NEWS
+This project is a desktop simulation of a subway system in **Calgary**, built entirely in **Java**. It provides a live, interactive view of trains moving across a subway map and allows you to explore additional real-time information like weather forecasts and news updates — all in one place.
 
-To Run the code first You have to add atleast first 2 Command line arguments
-Arg [0] = City in Canda (for weather And Time)
-Arg [1] = Train Number 
-Arg [2] = Country Code (For News, ca, us etc)(not compulsory)
+👉 **[📺 Watch the Video Demo]()**
 
-To get it working you have to make a database 
-Set the Hostname : 127.0.0.1
-Set the Port : 3306
-Username: admin
-Password: subwayscreen
+---
 
-MAKE a SCHEMA name advertisement_db and make a TABLE named Gifs
-and insert information about Gifs in Gifs folder.
--- Use the newly created database
-USE advertisement_db;
--- Create the GIFs table if it does not exist
-CREATE TABLE IF NOT EXISTS GIFs (
- brand_name VARCHAR(255),
- path VARCHAR(255)
-);
--- Insert values into the GIFs table
-INSERT INTO GIFs (brand_name, path) VALUES
-('Apple', 'Gifs/Iphone.gif'),
-('CocaCola', 'Gifs/CocaCola.gif'),
-('EyeWear', 'Gifs/EyeWear.gif'),
-('Flag', 'Gifs/CanadaFlag.gif'),
-('Lays', 'Gifs/Lays.gif');
--- Verify the data
-SELECT * FROM GIFs;
+## 🗺️ What the Project Does
 
-Information about every class and methods is fully described in Java Docs.
+The simulation displays trains moving across a subway network map in real time, giving you a visual experience of how a subway system operates. One of the main features is the ability to **highlight a specific train** by its number — that train will appear in **yellow** on the map so you can easily follow it while all other trains continue moving normally.
+
+Alongside the train simulation, the system connects to external APIs to display **live weather forecasts** and **news updates** right inside the application:
+
+- 🌤️ **Weather Forecast:** Enter the name of any city in Canada, and the simulation will show you the current weather forecast for that city.
+- 📰 **News Feed:** Provide a country code (like `ca` for Canada or `us` for the United States), and the system will display the latest news headlines from that country.
+
+These three pieces of information — city, train number, and country code — are provided as arguments when running the simulation. 
+The order is: [City] [train number] [country code]
+
+
